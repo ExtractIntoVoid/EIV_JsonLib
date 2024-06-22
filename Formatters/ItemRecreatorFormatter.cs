@@ -1,4 +1,4 @@
-﻿using EIV_JsonLib;
+﻿using EIV_JsonLib.Classes;
 using MessagePack;
 using MessagePack.Formatters;
 using System.Text;

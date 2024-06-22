@@ -8,6 +8,7 @@ namespace EIV_JsonLib.Interfaces;
 public interface IBackpack : IItem
 {
     public decimal MaxItemWeight { get; set; }
+    public decimal MaxItemVolume { get; set; }
 
     [JsonIgnore]
     public decimal CurrentWeight { get; set; }

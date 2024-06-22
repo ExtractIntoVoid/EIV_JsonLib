@@ -7,6 +7,6 @@ namespace EIV_JsonLib.Interfaces;
 public interface IMagazine : IItem
 {
     public List<string> Ammunition { get; set; }
-    public uint MagSize { get; set; }
+    public uint MaxMagSize { get; set; }
     public List<string> SupportedAmmo { get; set; }
 }

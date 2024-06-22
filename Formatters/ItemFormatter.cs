@@ -1,4 +1,4 @@
-﻿using EIV_JsonLib.DefaultItems;
+﻿using EIV_JsonLib.Defaults;
 using EIV_JsonLib.Interfaces;
 using MessagePack;
 using MessagePack.Formatters;
@@ -44,11 +44,14 @@ public class ItemFormatter : IMessagePackFormatter<IItem>
                     @default.Weight = (decimal)reader.ReadDouble();
                     break;
                 case 3:
+                    @default.Volume = (decimal)reader.ReadDouble();
+                    break;
+                case 4:
                     str = reader.ReadString();
                     if (str != null)
                         @default.AssetPath = str;
                     break;
-                case 4:
+                case 5:
                     arrayLen = reader.ReadArrayHeader();
                     for (int j = 0; j < arrayLen; j++)
                     {
@@ -86,6 +89,7 @@ public class ItemFormatter : IMessagePackFormatter<IItem>
         writer.WriteString(Encoding.UTF8.GetBytes(value.BaseID));
         writer.WriteString(Encoding.UTF8.GetBytes(value.ItemType));
         writer.Write((double)value.Weight);
+        writer.Write((double)value.Volume);
         writer.WriteString(Encoding.UTF8.GetBytes(value.AssetPath));
 
         writer.WriteArrayHeader(value.Tags.Count);

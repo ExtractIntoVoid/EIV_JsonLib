@@ -1,4 +1,4 @@
-﻿using EIV_JsonLib.DefaultItems;
+﻿using EIV_JsonLib.Defaults;
 using EIV_JsonLib.Interfaces;
 using MessagePack;
 using MessagePack.Formatters;
@@ -20,9 +20,9 @@ public class RigFormatter : IMessagePackFormatter<IRig>
         string? str = null;
         int arrayLen = 0;
         int count = reader.ReadArrayHeader();
-        if (count != (5 + 2 + 4))
+        if (count != (6 + 2 + 4))
         {
-            Console.WriteLine($"WARN Readed header should be {5 + 2 + 4} instead of {count}!");
+            Console.WriteLine($"WARN Readed header should be {6 + 2 + 4} instead of {count}!");
             return @default;
         }
             
@@ -44,11 +44,14 @@ public class RigFormatter : IMessagePackFormatter<IRig>
                     @default.Weight = (decimal)reader.ReadDouble();
                     break;
                 case 3:
+                    @default.Volume = (decimal)reader.ReadDouble();
+                    break;
+                case 4:
                     str = reader.ReadString();
                     if (str != null)
                         @default.AssetPath = str;
                     break;
-                case 4:
+                case 5:
                     arrayLen = reader.ReadArrayHeader();
                     for (int j = 0; j < arrayLen; j++)
                     {
@@ -57,15 +60,15 @@ public class RigFormatter : IMessagePackFormatter<IRig>
                             @default.Tags.Add(str);
                     }
                     break;
-                case 5:
+                case 6:
                     str = reader.ReadString();
                     if (str != null)
                         @default.PlateSlotId = str;
                     break;
-                case 6:
+                case 7:
                     @default.MaxItem = reader.ReadUInt32();
                     break;
-                case 7:
+                case 8:
                     arrayLen = reader.ReadArrayHeader();
                     for (int j = 0; j < arrayLen; j++)
                     {
@@ -74,7 +77,7 @@ public class RigFormatter : IMessagePackFormatter<IRig>
                             @default.ItemIds.Add(str);
                     }
                     break;
-                case 8:
+                case 9:
                     arrayLen = reader.ReadArrayHeader();
                     for (int j = 0; j < arrayLen; j++)
                     {
@@ -83,7 +86,7 @@ public class RigFormatter : IMessagePackFormatter<IRig>
                             @default.ItemTypesAccepted.Add(str);
                     }
                     break;
-                case 9:
+                case 10:
                     arrayLen = reader.ReadArrayHeader();
                     for (int j = 0; j < arrayLen; j++)
                     {
@@ -92,7 +95,7 @@ public class RigFormatter : IMessagePackFormatter<IRig>
                             @default.SpecificItemsAccepted.Add(str);
                     }
                     break;
-                case 10:
+                case 11:
                     arrayLen = reader.ReadArrayHeader();
                     for (int j = 0; j < arrayLen; j++)
                     {
@@ -124,12 +127,13 @@ public class RigFormatter : IMessagePackFormatter<IRig>
             return;
         }
 
-        writer.WriteArrayHeader( 5 + 2 + 4 );
+        writer.WriteArrayHeader( 6 + 2 + 4 );
 
         // Basic Item
         writer.WriteString(Encoding.UTF8.GetBytes(value.BaseID));
         writer.WriteString(Encoding.UTF8.GetBytes(value.ItemType));
         writer.Write((double)value.Weight);
+        writer.Write((double)value.Volume);
         writer.WriteString(Encoding.UTF8.GetBytes(value.AssetPath));
 
         writer.WriteArrayHeader(value.Tags.Count);

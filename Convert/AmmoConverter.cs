@@ -1,5 +1,5 @@
 ﻿using EIV_JsonLib.Interfaces;
-using EIV_JsonLib.DefaultItems;
+using EIV_JsonLib.Defaults;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

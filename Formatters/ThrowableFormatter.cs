@@ -1,4 +1,4 @@
-﻿using EIV_JsonLib.DefaultItems;
+﻿using EIV_JsonLib.Defaults;
 using EIV_JsonLib.Interfaces;
 using MessagePack;
 using MessagePack.Formatters;
@@ -20,9 +20,9 @@ public class ThrowableFormatter : IMessagePackFormatter<IThrowable>
         string? str = null;
         int arrayLen = 0;
         int count = reader.ReadArrayHeader();
-        if (count != (5 + 3))
+        if (count != (6 + 3))
         {
-            Console.WriteLine($"WARN Readed header should be {5 + 3} instead of {count}!");
+            Console.WriteLine($"WARN Readed header should be {6 + 3} instead of {count}!");
             return @default;
         }
             
@@ -44,11 +44,14 @@ public class ThrowableFormatter : IMessagePackFormatter<IThrowable>
                     @default.Weight = (decimal)reader.ReadDouble();
                     break;
                 case 3:
+                    @default.Weight = (decimal)reader.ReadDouble();
+                    break;
+                case 4:
                     str = reader.ReadString();
                     if (str != null)
                         @default.AssetPath = str;
                     break;
-                case 4:
+                case 5:
                     arrayLen = reader.ReadArrayHeader();
                     for (int j = 0; j < arrayLen; j++)
                     {
@@ -57,13 +60,13 @@ public class ThrowableFormatter : IMessagePackFormatter<IThrowable>
                             @default.Tags.Add(str);
                     }
                     break;
-                case 5:
+                case 6:
                     @default.CanUse = reader.ReadBoolean();
                     break;
-                case 6:
+                case 7:
                     @default.UseTime = (decimal)reader.ReadDouble();
                     break;
-                case 7:
+                case 8:
                     @default.FuseTime = (decimal)reader.ReadDouble();
                     break;
                 default:
@@ -89,12 +92,13 @@ public class ThrowableFormatter : IMessagePackFormatter<IThrowable>
             return;
         }
 
-        writer.WriteArrayHeader( 5 + 3 );
+        writer.WriteArrayHeader( 6 + 3 );
 
         // Basic Item
         writer.WriteString(Encoding.UTF8.GetBytes(value.BaseID));
         writer.WriteString(Encoding.UTF8.GetBytes(value.ItemType));
         writer.Write((double)value.Weight);
+        writer.Write((double)value.Volume);
         writer.WriteString(Encoding.UTF8.GetBytes(value.AssetPath));
 
         writer.WriteArrayHeader(value.Tags.Count);

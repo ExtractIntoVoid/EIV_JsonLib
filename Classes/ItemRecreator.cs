@@ -1,7 +1,7 @@
 ﻿using EIV_JsonMP.Formatters;
 using MessagePack;
 
-namespace EIV_JsonLib;
+namespace EIV_JsonLib.Classes;
 
 /// <summary>
 /// Internally cannot be deserialized since this is Just a json

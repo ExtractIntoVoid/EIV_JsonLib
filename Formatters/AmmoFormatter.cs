@@ -1,4 +1,4 @@
-﻿using EIV_JsonLib.DefaultItems;
+﻿using EIV_JsonLib.Defaults;
 using EIV_JsonLib.Interfaces;
 using MessagePack;
 using MessagePack.Formatters;
@@ -20,9 +20,9 @@ public class AmmoFormatter : IMessagePackFormatter<IAmmo>
         string? str = null;
         int arrayLen = 0;
         int count = reader.ReadArrayHeader();
-        if (count != (5 + 4))
+        if (count != (6 + 4))
         {
-            Console.WriteLine($"WARN Readed header should be {5 + 4} instead of {count}!");
+            Console.WriteLine($"WARN Readed header should be {6 + 4} instead of {count}!");
             return @default;
         }
             
@@ -44,11 +44,14 @@ public class AmmoFormatter : IMessagePackFormatter<IAmmo>
                     @default.Weight = (decimal)reader.ReadDouble();
                     break;
                 case 3:
+                    @default.Volume = (decimal)reader.ReadDouble();
+                    break;
+                case 4:
                     str = reader.ReadString();
                     if (str != null)
                         @default.AssetPath = str;
                     break;
-                case 4:
+                case 5:
                     arrayLen = reader.ReadArrayHeader();
                     for (int j = 0; j < arrayLen; j++)
                     {
@@ -57,16 +60,16 @@ public class AmmoFormatter : IMessagePackFormatter<IAmmo>
                             @default.Tags.Add(str);
                     }
                     break;
-                case 5:
+                case 6:
                     @default.Speed = (decimal)reader.ReadDouble();
                     break;
-                case 6:
+                case 7:
                     @default.Damage = reader.ReadUInt32();
                     break;
-                case 7:
+                case 8:
                     @default.ArmorDamage = reader.ReadUInt32();
                     break;
-                case 8:
+                case 9:
                     str = reader.ReadString();
                     if (str != null)
                         @default.DamageType = str;
@@ -94,12 +97,13 @@ public class AmmoFormatter : IMessagePackFormatter<IAmmo>
             return;
         }
 
-        writer.WriteArrayHeader( 5 + 4 );
+        writer.WriteArrayHeader( 6 + 4 );
 
         // Basic Item
         writer.WriteString(Encoding.UTF8.GetBytes(value.BaseID));
         writer.WriteString(Encoding.UTF8.GetBytes(value.ItemType));
         writer.Write((double)value.Weight);
+        writer.Write((double)value.Volume);
         writer.WriteString(Encoding.UTF8.GetBytes(value.AssetPath));
 
         writer.WriteArrayHeader(value.Tags.Count);
@@ -113,8 +117,6 @@ public class AmmoFormatter : IMessagePackFormatter<IAmmo>
         writer.Write(value.Damage);
         writer.Write(value.ArmorDamage);
         writer.Write(value.DamageType);
-
-
 
         writer.Flush();
     }

@@ -1,7 +1,8 @@
-﻿using EIV_JsonLib.DefaultItems;
+﻿using EIV_JsonLib.Defaults;
 using EIV_JsonLib.Interfaces;
 using MessagePack;
 using MessagePack.Formatters;
+using Newtonsoft.Json.Linq;
 using System.Text;
 
 namespace EIV_JsonMP.Formatters;
@@ -45,6 +46,9 @@ public class StashFormatter : IMessagePackFormatter<IStash>
                             @default.Items.Add(str);
                     }
                     break;
+                case 3:
+                    @default.MaxVolume = (decimal)reader.ReadDouble();
+                    break; ;
                 default:
                     reader.Skip();
                     break;
@@ -68,7 +72,7 @@ public class StashFormatter : IMessagePackFormatter<IStash>
             return;
         }
 
-        writer.WriteArrayHeader( 3 );
+        writer.WriteArrayHeader( 4 );
 
         // Basic Item
         writer.Write(value.MaxSize);
@@ -78,6 +82,7 @@ public class StashFormatter : IMessagePackFormatter<IStash>
         {
             writer.WriteString(Encoding.UTF8.GetBytes(item));
         }
+        writer.Write((double)value.MaxVolume);
 
         writer.Flush();
     }
