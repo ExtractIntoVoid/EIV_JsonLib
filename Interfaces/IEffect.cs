@@ -12,4 +12,5 @@ public interface IEffect
     public StrengthEffect Strength { get; set; }
     public List<string> AppliedFrom { get; set; }
     public List<string> AppliedTo { get; set; }
+    public string UseClass { get; set; }
 }

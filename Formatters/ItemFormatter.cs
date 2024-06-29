@@ -13,7 +13,7 @@ public class ItemFormatter : IMessagePackFormatter<IItem>
         DefaultItem @default = new();
         if (reader.TryReadNil())
         {
-            return (IItem)@default;
+            return @default;
         }
         options.Security.DepthStep(ref reader);
 
@@ -23,7 +23,7 @@ public class ItemFormatter : IMessagePackFormatter<IItem>
         if (count != (5))
         {
             Console.WriteLine($"WARN Readed header should be {5} instead of {count}!");
-            return (IItem)@default;
+            return @default;
         }
             
         for (int i = 0; i < count; i++)
@@ -66,7 +66,7 @@ public class ItemFormatter : IMessagePackFormatter<IItem>
             }
         }
         reader.Depth--;
-        return (IItem)@default;
+        return @default;
     }
 
     public void Serialize(ref MessagePackWriter writer, IItem value, MessagePackSerializerOptions options)

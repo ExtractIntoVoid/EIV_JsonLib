@@ -13,4 +13,5 @@ public class DefaultEffect : IEffect
     public StrengthEffect Strength { get; set; } = new();
     public List<string> AppliedFrom { get; set; } = new();
     public List<string> AppliedTo { get; set; } = new();
+    public string UseClass { get; set; } = string.Empty;
 }

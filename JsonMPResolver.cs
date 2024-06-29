@@ -13,13 +13,11 @@ public class JsonMPResolver : IFormatterResolver
 
     private static class FormatterCache<T>
     {
-        public static readonly IMessagePackFormatter<T> Formatter;
+        public static readonly IMessagePackFormatter<T>? Formatter;
 
-        // generic's static constructor should be minimized for reduce type generation size!
-        // use outer helper method.
         static FormatterCache()
         {
-            Formatter = (IMessagePackFormatter<T>)JsonMPFormatters.GetFormatter(typeof(T));
+            Formatter = (IMessagePackFormatter<T>?)JsonMPFormatters.GetFormatter(typeof(T));
         }
     }
 }

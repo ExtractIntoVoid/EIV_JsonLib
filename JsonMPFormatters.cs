@@ -1,12 +1,13 @@
 ﻿using EIV_JsonLib.Classes;
 using EIV_JsonLib.Interfaces;
 using EIV_JsonMP.Formatters;
+using MessagePack.Formatters;
 
 namespace EIV_JsonMP;
 
 public static class JsonMPFormatters
 {
-    public static Dictionary<Type, object> Formatters = new Dictionary<Type, object>()
+    public static Dictionary<Type, IMessagePackFormatter> Formatters = new()
     {
         { typeof(IAmmo), new AmmoFormatter() },
         { typeof(IArmoredRig), new ArmoredRigFormatter() },
@@ -26,9 +27,9 @@ public static class JsonMPFormatters
         // add more your own custom serializers.
     };
 
-    public static object GetFormatter(Type t)
+    public static IMessagePackFormatter? GetFormatter(Type t)
     {
-        object formatter;
+        IMessagePackFormatter? formatter;
         if (Formatters.TryGetValue(t, out formatter))
         {
             return formatter;
