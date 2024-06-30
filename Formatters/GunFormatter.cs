@@ -20,9 +20,9 @@ public class GunFormatter : IMessagePackFormatter<IGun>
         string? str = null;
         int arrayLen = 0;
         int count = reader.ReadArrayHeader();
-        if (count != (6 + 4))
+        if (count != (6 + 3))
         {
-            Console.WriteLine($"WARN Readed header should be {6 + 4} instead of {count}!");
+            Console.WriteLine($"WARN Readed header should be {6 + 3} instead of {count}!");
             return @default;
         }
             
@@ -79,15 +79,6 @@ public class GunFormatter : IMessagePackFormatter<IGun>
                     }
                     break;
                 case 8:
-                    arrayLen = reader.ReadArrayHeader();
-                    for (int j = 0; j < arrayLen; j++)
-                    {
-                        str = reader.ReadString();
-                        if (str != null)
-                            @default.Attachments.Add(str);
-                    }
-                    break;
-                case 9:
                     if (!reader.TryReadNil())
                     {
                         @default.Magazine = options.Resolver.GetFormatterWithVerify<IMagazine>().Deserialize(ref reader, options);
@@ -116,7 +107,7 @@ public class GunFormatter : IMessagePackFormatter<IGun>
             return;
         }
 
-        writer.WriteArrayHeader( 6 + 4 );
+        writer.WriteArrayHeader( 6 + 3 );
 
         // Basic Item
         writer.WriteString(Encoding.UTF8.GetBytes(value.BaseID));
@@ -140,12 +131,6 @@ public class GunFormatter : IMessagePackFormatter<IGun>
 
         writer.WriteArrayHeader(value.AmmoSupported.Count);
         foreach (var item in value.AmmoSupported)
-        {
-            writer.WriteString(Encoding.UTF8.GetBytes(item));
-        }
-
-        writer.WriteArrayHeader(value.Attachments.Count);
-        foreach (var item in value.Attachments)
         {
             writer.WriteString(Encoding.UTF8.GetBytes(item));
         }
