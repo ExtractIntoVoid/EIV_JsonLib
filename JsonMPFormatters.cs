@@ -24,6 +24,8 @@ public static class JsonMPFormatters
         { typeof(IRig), new RigFormatter() },
         { typeof(IStash), new StashFormatter() },
         { typeof(IThrowable), new ThrowableFormatter() },
+        { typeof(IEffect), new EffectFormatter() },
+        { typeof(IConsumable), new ConsumableFormatter() },
         // add more your own custom serializers.
     };
 

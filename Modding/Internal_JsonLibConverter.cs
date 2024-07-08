@@ -22,6 +22,8 @@ internal class Internal_JsonLibConverter : IJsonLibConverter
             "IRig" => new RigConverter(),
             "IStash" => new StashConverter(),
             "IThrowable" => new ThrowableConverter(),
+            "IEffect" => new EffectConverter(),
+            "IConsumable" => new ConsumableConverter(),
             _ => null,
         };
     }
@@ -43,6 +45,8 @@ internal class Internal_JsonLibConverter : IJsonLibConverter
             new RigConverter(),
             new StashConverter(),
             new ThrowableConverter(),
+            new EffectConverter(),
+            new ConsumableConverter(),
         ];
     }
 }

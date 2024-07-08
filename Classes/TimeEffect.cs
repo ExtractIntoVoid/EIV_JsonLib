@@ -1,9 +1,13 @@
-﻿namespace EIV_JsonLib.Classes;
+﻿using EIV_JsonMP.Formatters;
+using MessagePack;
 
+namespace EIV_JsonLib.Classes;
+
+[MessagePackFormatter(typeof(TimeEffectFormatter))]
 public class TimeEffect
 {
-    public ulong Initial { get; set; }
-    public ulong Min { get; set; }
-    public long Max { get; set; }
-    public ulong WaitUntilApply { get; set; }
+    public double Initial { get; set; }
+    public double Min { get; set; }
+    public double Max { get; set; }
+    public double WaitUntilApply { get; set; }
 }

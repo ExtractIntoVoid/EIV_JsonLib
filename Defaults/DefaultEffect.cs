@@ -14,4 +14,9 @@ public class DefaultEffect : IEffect
     public List<string> AppliedFrom { get; set; } = new();
     public List<string> AppliedTo { get; set; } = new();
     public string UseClass { get; set; } = string.Empty;
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
 }

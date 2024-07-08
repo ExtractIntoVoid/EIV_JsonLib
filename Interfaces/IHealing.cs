@@ -1,4 +1,5 @@
-﻿using EIV_JsonMP.Formatters;
+﻿using EIV_JsonLib.Classes;
+using EIV_JsonMP.Formatters;
 using MessagePack;
 
 namespace EIV_JsonLib.Interfaces;
@@ -7,7 +8,5 @@ namespace EIV_JsonLib.Interfaces;
 public interface IHealing : IUsable
 {
     public decimal HealAmount { get; set; }
-
-    // IEffect's BaseID I guess
-    public List<string> SideEffect { get; set; }
+    public List<SideEffect> SideEffects { get; set; }
 }

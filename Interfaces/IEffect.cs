@@ -1,8 +1,11 @@
 ﻿using EIV_JsonLib.Classes;
+using EIV_JsonMP.Formatters;
+using MessagePack;
 
 namespace EIV_JsonLib.Interfaces;
 
-public interface IEffect
+[MessagePackFormatter(typeof(EffectFormatter))]
+public interface IEffect : ICloneable
 {
     public string EffectID { get; set; }
     public EffectType EffectType { get; set; }

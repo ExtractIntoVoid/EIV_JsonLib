@@ -4,11 +4,11 @@ using MessagePack.Formatters;
 
 namespace EIV_JsonMP.Formatters;
 
-public class TimeEffectFormatter : IMessagePackFormatter<TimeEffect>
+public class SideEffectFormatter : IMessagePackFormatter<SideEffect>
 {
-    public TimeEffect Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
+    public SideEffect Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
     {
-        TimeEffect @default = new();
+        SideEffect @default = new();
         if (reader.TryReadNil())
         {
             return @default;
@@ -16,9 +16,9 @@ public class TimeEffectFormatter : IMessagePackFormatter<TimeEffect>
         options.Security.DepthStep(ref reader);
 
         int count = reader.ReadArrayHeader();
-        if (count != (4))
+        if (count != (3))
         {
-            Console.WriteLine($"WARN Readed header should be {4} instead of {count}!");
+            Console.WriteLine($"WARN Readed header should be {3} instead of {count}!");
             return @default;
         }
             
@@ -27,16 +27,15 @@ public class TimeEffectFormatter : IMessagePackFormatter<TimeEffect>
             switch (i)
             {
                 case 0:
-                    @default.Initial = reader.ReadDouble();
+                    var str = reader.ReadString();
+                    if (str != null)
+                        @default.EffectName = str;
                     break;
                 case 1:
-                    @default.Min = reader.ReadDouble();
+                    @default.EffectTime = reader.ReadInt32();
                     break;
                 case 2:
-                    @default.Max = reader.ReadDouble();
-                    break;
-                case 3:
-                    @default.WaitUntilApply = reader.ReadDouble();
+                    @default.EffectStrength = reader.ReadInt32();
                     break;
                 default:
                     reader.Skip();
@@ -48,7 +47,7 @@ public class TimeEffectFormatter : IMessagePackFormatter<TimeEffect>
         return @default;
     }
 
-    public void Serialize(ref MessagePackWriter writer, TimeEffect value, MessagePackSerializerOptions options)
+    public void Serialize(ref MessagePackWriter writer, SideEffect value, MessagePackSerializerOptions options)
     {
         if (value == null)
         {
@@ -56,19 +55,18 @@ public class TimeEffectFormatter : IMessagePackFormatter<TimeEffect>
             return;
         }
 
-        if (value == new TimeEffect())
+        if (value == new SideEffect())
         {
             writer.WriteNil();
             return;
         }
 
-        writer.WriteArrayHeader( 4 );
+        writer.WriteArrayHeader( 3 );
 
         // Basic Item
-        writer.Write(value.Initial);
-        writer.Write(value.Min);
-        writer.Write(value.Max);
-        writer.Write(value.WaitUntilApply);
+        writer.Write(value.EffectName);
+        writer.Write(value.EffectTime);
+        writer.Write(value.EffectStrength);
 
         writer.Flush();
     }

@@ -1,5 +1,4 @@
-﻿using MessagePack;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace EIV_JsonLib.Interfaces;
 

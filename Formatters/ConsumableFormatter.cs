@@ -7,11 +7,11 @@ using System.Text;
 
 namespace EIV_JsonMP.Formatters;
 
-public class HealingFormatter : IMessagePackFormatter<IHealing>
+public class ConsumableFormatter : IMessagePackFormatter<IConsumable>
 {
-    public IHealing Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
+    public IConsumable Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
     {
-        DefaultHealing @default = new();
+        DefaultConsumable @default = new();
         if (reader.TryReadNil())
         {
             return @default;
@@ -21,9 +21,9 @@ public class HealingFormatter : IMessagePackFormatter<IHealing>
         string? str = null;
         int arrayLen = 0;
         int count = reader.ReadArrayHeader();
-        if (count != (6 + 4))
+        if (count != (6 + 6))
         {
-            Console.WriteLine($"WARN Readed header should be {6 + 34} instead of {count}!");
+            Console.WriteLine($"WARN Readed header should be {6 + 6} instead of {count}!");
             return @default;
         }
             
@@ -62,13 +62,13 @@ public class HealingFormatter : IMessagePackFormatter<IHealing>
                     }
                     break;
                 case 6:
-                    @default.CanUse = reader.ReadBoolean();
+                    @default.MaxUses = reader.ReadUInt32();
                     break;
                 case 7:
-                    @default.UseTime = (decimal)reader.ReadDouble();
+                    @default.EnergyRestore = reader.ReadInt32();
                     break;
                 case 8:
-                    @default.HealAmount = (decimal)reader.ReadDouble();
+                    @default.HydrationRestore = reader.ReadInt32();
                     break;
                 case 9:
                     arrayLen = reader.ReadArrayHeader();
@@ -77,6 +77,12 @@ public class HealingFormatter : IMessagePackFormatter<IHealing>
                         SideEffect sideEffect = options.Resolver.GetFormatterWithVerify<SideEffect>().Deserialize(ref reader, options);
                         @default.SideEffects.Add(sideEffect);
                     }
+                    break;
+                case 10:
+                    @default.CanUse = reader.ReadBoolean();
+                    break;
+                case 11:
+                    @default.UseTime = (decimal)reader.ReadDouble();
                     break;
                 default:
                     reader.Skip();
@@ -87,7 +93,7 @@ public class HealingFormatter : IMessagePackFormatter<IHealing>
         return @default;
     }
 
-    public void Serialize(ref MessagePackWriter writer, IHealing value, MessagePackSerializerOptions options)
+    public void Serialize(ref MessagePackWriter writer, IConsumable value, MessagePackSerializerOptions options)
     {
         if (value == null)
         {
@@ -95,13 +101,13 @@ public class HealingFormatter : IMessagePackFormatter<IHealing>
             return;
         }
 
-        if (value == new DefaultHealing())
+        if (value == new DefaultAmmo())
         {
             writer.WriteNil();
             return;
         }
 
-        writer.WriteArrayHeader( 6 + 4 );
+        writer.WriteArrayHeader( 6 + 6 );
 
         // Basic Item
         writer.WriteString(Encoding.UTF8.GetBytes(value.BaseID));
@@ -117,14 +123,17 @@ public class HealingFormatter : IMessagePackFormatter<IHealing>
         }
 
         // Additional Data
-        writer.Write(value.CanUse);
-        writer.Write((double)value.UseTime);
-        writer.Write((double)value.HealAmount);
+        writer.Write(value.MaxUses);
+        writer.Write(value.EnergyRestore);
+        writer.Write(value.HydrationRestore);
+
         writer.WriteArrayHeader(value.SideEffects.Count);
         foreach (var item in value.SideEffects)
         {
             options.Resolver.GetFormatterWithVerify<SideEffect>().Serialize(ref writer, item, options);
         }
+        writer.Write(value.CanUse);
+        writer.Write((double)value.UseTime);
 
         writer.Flush();
     }
