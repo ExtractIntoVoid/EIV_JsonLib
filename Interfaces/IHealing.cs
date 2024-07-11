@@ -7,6 +7,6 @@ namespace EIV_JsonLib.Interfaces;
 [MessagePackFormatter(typeof(HealingFormatter))]
 public interface IHealing : IUsable
 {
-    public decimal HealAmount { get; set; }
+    public int HealAmount { get; set; }
     public List<SideEffect> SideEffects { get; set; }
 }

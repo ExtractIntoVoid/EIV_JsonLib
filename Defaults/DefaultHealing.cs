@@ -5,7 +5,7 @@ namespace EIV_JsonLib.Defaults;
 
 public class DefaultHealing : DefaultItem, IHealing
 {
-    public decimal HealAmount { get; set; }
+    public int HealAmount { get; set; }
     public List<SideEffect> SideEffects { get; set; } = [];
     public bool CanUse { get; set; }
     public decimal UseTime { get; set; }

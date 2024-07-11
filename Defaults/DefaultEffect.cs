@@ -12,7 +12,6 @@ public class DefaultEffect : IEffect
     public TimeEffect Time { get; set; } = new();
     public StrengthEffect Strength { get; set; } = new();
     public List<string> AppliedFrom { get; set; } = new();
-    public List<string> AppliedTo { get; set; } = new();
     public string UseClass { get; set; } = string.Empty;
 
     public object Clone()

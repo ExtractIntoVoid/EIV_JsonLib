@@ -68,7 +68,7 @@ public class HealingFormatter : IMessagePackFormatter<IHealing>
                     @default.UseTime = (decimal)reader.ReadDouble();
                     break;
                 case 8:
-                    @default.HealAmount = (decimal)reader.ReadDouble();
+                    @default.HealAmount = reader.ReadInt32();
                     break;
                 case 9:
                     arrayLen = reader.ReadArrayHeader();
@@ -119,7 +119,7 @@ public class HealingFormatter : IMessagePackFormatter<IHealing>
         // Additional Data
         writer.Write(value.CanUse);
         writer.Write((double)value.UseTime);
-        writer.Write((double)value.HealAmount);
+        writer.Write(value.HealAmount);
         writer.WriteArrayHeader(value.SideEffects.Count);
         foreach (var item in value.SideEffects)
         {

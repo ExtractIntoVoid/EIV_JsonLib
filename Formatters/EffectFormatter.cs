@@ -22,9 +22,9 @@ public class EffectFormatter : IMessagePackFormatter<IEffect>
         string? str = null;
         int arrayLen = 0;
         int count = reader.ReadArrayHeader();
-        if (count != (5))
+        if (count != (8))
         {
-            Console.WriteLine($"WARN Readed header should be {5} instead of {count}!");
+            Console.WriteLine($"WARN Readed header should be {8} instead of {count}!");
             return @default;
         }
             
@@ -62,15 +62,6 @@ public class EffectFormatter : IMessagePackFormatter<IEffect>
                     }
                     break;
                 case 7:
-                    arrayLen = reader.ReadArrayHeader();
-                    for (int j = 0; j < arrayLen; j++)
-                    {
-                        str = reader.ReadString();
-                        if (str != null)
-                            @default.AppliedTo.Add(str);
-                    }
-                    break;
-                case 8:
                     str = reader.ReadString();
                     if (str != null)
                         @default.UseClass = str;
@@ -98,7 +89,7 @@ public class EffectFormatter : IMessagePackFormatter<IEffect>
             return;
         }
 
-        writer.WriteArrayHeader( 9 );
+        writer.WriteArrayHeader( 8 );
 
         // Basic Item
         writer.WriteString(Encoding.UTF8.GetBytes(value.EffectID));
@@ -111,11 +102,6 @@ public class EffectFormatter : IMessagePackFormatter<IEffect>
 
         writer.WriteArrayHeader(value.AppliedFrom.Count);
         foreach (var item in value.AppliedFrom)
-        {
-            writer.WriteString(Encoding.UTF8.GetBytes(item));
-        }
-        writer.WriteArrayHeader(value.AppliedTo.Count);
-        foreach (var item in value.AppliedTo)
         {
             writer.WriteString(Encoding.UTF8.GetBytes(item));
         }
