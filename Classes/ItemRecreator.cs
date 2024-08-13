@@ -9,6 +9,29 @@ namespace EIV_JsonLib.Classes;
 [MessagePackFormatter(typeof(ItemRecreatorFormatter))]
 public class ItemRecreator
 {
+    public ItemRecreator()
+    { 
+
+    }
+
+    public ItemRecreator(string itemId)
+    {
+        ItemBaseID = itemId;
+    }
+
+    public ItemRecreator(string itemId, uint amount)
+    {
+        ItemBaseID = itemId;
+        Amount = amount;
+    }
+
+    public ItemRecreator(string itemId, uint amount, List<ItemRecreator> itemRecreators)
+    {
+        ItemBaseID = itemId;
+        Amount = amount;
+        Contained = itemRecreators;
+    }
+
     public string ItemBaseID { get; set; } = string.Empty;
     public uint Amount { get; set; } = 1;
     public List<ItemRecreator> Contained { get; set; } = [];
@@ -28,10 +51,11 @@ public class ItemRecreator
         public uint? UIntValue;
         public int? IntValue;
         public decimal? DecimalValue;
+        public List<string>? ListStringValue;
 
         public override string ToString()
         {
-            return $"AvailableTypeName: {AvailableTypeName.ToString()} String? {StringValue}, Uint? {UIntValue}, Int? {IntValue}, Dec? {DecimalValue}";
+            return $"AvailableTypeName: {AvailableTypeName.ToString()} String? {StringValue}, Uint? {UIntValue}, Int? {IntValue}, Dec? {DecimalValue}, ListString? {ListStringValue}";
         }
     }
 }
@@ -45,11 +69,11 @@ public enum AcceptedSlots : byte
     PlateSlot,
 }
 
-[Flags]
 public enum TypeName : byte
 {
-    String = 1,
-    Int32 = 2,
-    UInt32 = 4,
-    Decimal = 8,
+    String,
+    Int,
+    UInt,
+    Decimal,
+    List_String,
 }

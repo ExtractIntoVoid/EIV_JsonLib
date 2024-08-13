@@ -69,14 +69,24 @@ public class ItemRecreatorFormatter : IMessagePackFormatter<ItemRecreator>
                                 if (str2 != null)
                                     kVChange.StringValue = str2;
                                 break;
-                            case TypeName.Int32:
+                            case TypeName.Int:
                                 kVChange.IntValue = reader.ReadInt32();
                                 break;
-                            case TypeName.UInt32:
+                            case TypeName.UInt:
                                 kVChange.UIntValue = reader.ReadUInt32();
                                 break;
                             case TypeName.Decimal:
                                 kVChange.DecimalValue = (decimal)reader.ReadDouble();
+                                break;
+                            case TypeName.List_String:
+                                kVChange.ListStringValue = [];
+                                int listCount = reader.ReadArrayHeader();
+                                for (int x = 0; x < listCount; x++)
+                                {
+                                    var str3 = reader.ReadString();
+                                    if (str3 != null)
+                                        kVChange.ListStringValue.Add(str3);
+                                }
                                 break;
                             default:
                                 break;
@@ -124,19 +134,19 @@ public class ItemRecreatorFormatter : IMessagePackFormatter<ItemRecreator>
             writer.WriteString(Encoding.UTF8.GetBytes(item.Key));
             
             writer.Write((byte)item.Value.AvailableTypeName);
-            Console.WriteLine(item.Value);
+
             switch (item.Value.AvailableTypeName)
             {
                 case TypeName.String:
                     writer.Write(item.Value.StringValue);
                     break;
-                case TypeName.Int32:
+                case TypeName.Int:
                     if (item.Value.IntValue.HasValue)
                         writer.WriteInt32(item.Value.IntValue.Value);
                     else
                         writer.WriteNil();
                     break;
-                case TypeName.UInt32:
+                case TypeName.UInt:
                     if (item.Value.UIntValue.HasValue)
                         writer.WriteUInt32(item.Value.UIntValue.Value);
                     else
@@ -145,6 +155,18 @@ public class ItemRecreatorFormatter : IMessagePackFormatter<ItemRecreator>
                 case TypeName.Decimal:
                     if (item.Value.DecimalValue.HasValue)
                         writer.Write((double)item.Value.DecimalValue.Value);
+                    else
+                        writer.WriteNil();
+                    break;
+                case TypeName.List_String:
+                    if (item.Value.ListStringValue != null)
+                    {
+                        writer.WriteArrayHeader(item.Value.ListStringValue.Count);
+                        foreach (string listValue in item.Value.ListStringValue)
+                        {
+                            writer.WriteString(Encoding.UTF8.GetBytes(listValue));
+                        }
+                    }
                     else
                         writer.WriteNil();
                     break;
