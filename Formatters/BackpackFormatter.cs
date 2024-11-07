@@ -1,4 +1,5 @@
-﻿using EIV_JsonLib.Defaults;
+﻿using EIV_JsonLib.Classes;
+using EIV_JsonLib.Defaults;
 using EIV_JsonLib.Interfaces;
 using MessagePack;
 using MessagePack.Formatters;
@@ -66,6 +67,15 @@ public class BackpackFormatter : IMessagePackFormatter<IBackpack>
                 case 7:
                     @default.CurrentWeight = (decimal)reader.ReadDouble();
                     break;
+                case 8:
+                    arrayLen = reader.ReadArrayHeader();
+                    for (int j = 0; j < arrayLen; j++)
+                    {
+                        var item = options.Resolver.GetFormatterWithVerify<IItem>().Deserialize(ref reader, options);
+                        if (item != null)
+                            @default.Items.Add(item);
+                    }
+                    break;
                 default:
                     reader.Skip();
                     break;
@@ -107,6 +117,12 @@ public class BackpackFormatter : IMessagePackFormatter<IBackpack>
         // Additional Data
         writer.Write((double)value.MaxItemWeight);
         writer.Write((double)value.CurrentWeight);
+
+        writer.WriteArrayHeader(value.Items.Count);
+        foreach (var item in value.Items)
+        {
+            options.Resolver.GetFormatterWithVerify<IItem>().Serialize(ref writer, item, options);
+        }
 
         writer.Flush();
     }

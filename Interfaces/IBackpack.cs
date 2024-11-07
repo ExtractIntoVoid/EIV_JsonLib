@@ -12,4 +12,5 @@ public interface IBackpack : IItem
 
     [JsonIgnore]
     public decimal CurrentWeight { get; set; }
+    public List<IItem> Items { get; set; }
 }
