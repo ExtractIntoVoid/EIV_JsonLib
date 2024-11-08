@@ -5,11 +5,29 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>EIV_JsonLib</RootNamespace>
+    <Title>$(AssemblyName)</Title>
+    <Authors>Extract Into Void</Authors>
+    <Description>Json/MessagePack library for EIV Project</Description>
+    <Copyright>$(Authors)</Copyright>
+    <PackageProjectUrl>https://github.com/ExtractIntoVoid/EIV_JsonLib</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MessagePack" Version="2.5.187" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
