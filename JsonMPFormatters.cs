@@ -1,9 +1,9 @@
 ﻿using EIV_JsonLib.Classes;
+using EIV_JsonLib.Formatters;
 using EIV_JsonLib.Interfaces;
-using EIV_JsonMP.Formatters;
 using MessagePack.Formatters;
 
-namespace EIV_JsonMP;
+namespace EIV_JsonLib;
 
 public static class JsonMPFormatters
 {
@@ -31,13 +31,6 @@ public static class JsonMPFormatters
 
     public static IMessagePackFormatter? GetFormatter(Type t)
     {
-        IMessagePackFormatter? formatter;
-        if (Formatters.TryGetValue(t, out formatter))
-        {
-            return formatter;
-        }
-
-        // If type can not get, must return null for fallback mechanism.
-        return null;
+        return Formatters.GetValueOrDefault(t, null);
     }
 }

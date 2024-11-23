@@ -1,9 +1,9 @@
-﻿using EIV_JsonLib.Classes;
+﻿using System.Text;
+using EIV_JsonLib.Classes;
 using MessagePack;
 using MessagePack.Formatters;
-using System.Text;
 
-namespace EIV_JsonMP.Formatters;
+namespace EIV_JsonLib.Formatters;
 
 public class ItemRecreatorFormatter : IMessagePackFormatter<ItemRecreator>
 {

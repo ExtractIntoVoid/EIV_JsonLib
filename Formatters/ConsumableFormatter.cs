@@ -1,11 +1,11 @@
-﻿using EIV_JsonLib.Classes;
+﻿using System.Text;
+using EIV_JsonLib.Classes;
 using EIV_JsonLib.Defaults;
 using EIV_JsonLib.Interfaces;
 using MessagePack;
 using MessagePack.Formatters;
-using System.Text;
 
-namespace EIV_JsonMP.Formatters;
+namespace EIV_JsonLib.Formatters;
 
 public class ConsumableFormatter : IMessagePackFormatter<IConsumable>
 {

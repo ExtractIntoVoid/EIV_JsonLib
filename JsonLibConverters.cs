@@ -2,7 +2,7 @@
 
 namespace EIV_JsonLib;
 
-public class JsonLibConverters
+public static class JsonLibConverters
 {
 #pragma warning disable CA2211 // Non-constant fields should not be visible
     public static List<IJsonLibConverter> ModdedConverters =

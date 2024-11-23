@@ -2,7 +2,7 @@
 using MessagePack;
 using MessagePack.Formatters;
 
-namespace EIV_JsonMP.Formatters;
+namespace EIV_JsonLib.Formatters.MiniFormatters;
 
 public class SideEffectFormatter : IMessagePackFormatter<SideEffect>
 {
