@@ -1,7 +1,6 @@
-﻿namespace EIV_JsonLib.Interfaces;
+﻿namespace EIV_JsonLib.Interface;
 
-// DONT FORMAT THIS, Only used in other Formatter!
-public interface IDamageDealer : IItem
+public interface IDamageDealer
 {
     public uint Damage { get; set; }
     public uint ArmorDamage { get; set; }

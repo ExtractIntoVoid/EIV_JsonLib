@@ -1,4 +1,4 @@
 # EIV_JsonLib
-Json Library for EIV Game, Lobby used and Visible changes from Data_Assets
+Json Library for EIV Game, Lobby.
 
-It contains EIV_JsonMP for MessagePack (Good way to communicate)
+Thanks to MemoryPack it making it easier to add additional Mods for JsonLib

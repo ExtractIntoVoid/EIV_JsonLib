@@ -1,7 +1,6 @@
-﻿namespace EIV_JsonLib.Interfaces;
+﻿namespace EIV_JsonLib.Interface;
 
-// DONT FORMAT THIS, Only used in other Formatter!
-public interface IDurable : IItem
+public interface IDurable
 {
     public uint Durability { get; set; }
 }
