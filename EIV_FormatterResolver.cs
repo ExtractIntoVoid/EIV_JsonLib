@@ -1,11 +1,11 @@
 ﻿using MessagePack;
 using MessagePack.Formatters;
 
-namespace EIV_JsonMP;
+namespace EIV_JsonLib;
 
-public class JsonMPResolver : IFormatterResolver
+public class EIVFormatterResolver : IFormatterResolver
 {
-    public static readonly IFormatterResolver Instance = new JsonMPResolver();
+    public static readonly IFormatterResolver Instance = new EIVFormatterResolver();
     public IMessagePackFormatter<T>? GetFormatter<T>()
     {
         return FormatterCache<T>.Formatter;
