@@ -10,7 +10,8 @@ public class CustomArmorBaseFormatter : MemoryPackFormatter<ArmorBase>
     public static Dictionary<Type, ushort> TypeToTag = new()
     {
         { typeof(Rig), 0 },
-        
+        { typeof(Helmet), 1 },
+        { typeof(Vest), 2 },
     };
 
     [Preserve]
