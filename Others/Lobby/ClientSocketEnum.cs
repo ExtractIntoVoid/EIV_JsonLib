@@ -35,5 +35,17 @@ public enum ClientSocketEnum
     /// Kick desired player. (Has Reason too)
     /// </summary>
     GroupKick,
+    /// <summary>
+    /// Search for friend name
+    /// </summary>
+    FriendSearch,
+    /// <summary>
+    /// Response to <see cref="FriendSearch"/>
+    /// </summary>
+    FriendSearchResponse,
+    /// <summary>
+    /// Adding / Removing a friend / invite
+    /// </summary>
+    FriendAction,
     // More soon
 }

@@ -51,8 +51,6 @@ public partial class ItemRecreator
     {
         return $"ItemBaseID: {ItemBaseID}, Amount: {Amount}, Slot: {Slot}, ChangedValues: {ChangedValues.Count}";
     }
-
-
 }
 
 [MemoryPackable]
