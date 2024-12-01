@@ -47,5 +47,9 @@ public enum ClientSocketEnum
     /// Adding / Removing a friend / invite
     /// </summary>
     FriendAction,
+    /// <summary>
+    /// Adding, removing users in the blocklist.
+    /// </summary>
+    BlockListUpdate,
     // More soon
 }
