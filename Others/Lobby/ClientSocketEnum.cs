@@ -2,7 +2,18 @@
 
 public enum ClientSocketEnum
 {
+    /// <summary>
+    /// Custom message for lobby related plugins.
+    /// </summary>
+    Custom = -1,
+    /// <summary>
+    /// Nothing, only used to skip messages
+    /// </summary>
     None,
+    /// <summary>
+    /// Basic response for socket.
+    /// </summary>
+    SocketResponse,
     /// <summary>
     /// User request to join a map. Create or Join.
     /// </summary>
@@ -52,4 +63,5 @@ public enum ClientSocketEnum
     /// </summary>
     BlockListUpdate,
     // More soon
+    
 }
