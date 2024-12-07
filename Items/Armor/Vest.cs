@@ -4,4 +4,4 @@ using MemoryPack;
 namespace EIV_JsonLib;
 
 [MemoryPackable]
-public partial class Vest : ArmorBase;
+public partial class Vest : CoreArmor;

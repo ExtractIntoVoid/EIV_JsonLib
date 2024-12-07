@@ -5,7 +5,7 @@ using MemoryPack.Internal;
 namespace EIV_JsonLib.Formatter;
 
 [Preserve]
-public class CustomUsableItemBaseFormatter : MemoryPackFormatter<UsableItemBase>
+public class CustomCoreUsableFormatter : MemoryPackFormatter<CoreUsable>
 {
     public static Dictionary<Type, ushort> TypeToTag = new()
     {
@@ -17,7 +17,7 @@ public class CustomUsableItemBaseFormatter : MemoryPackFormatter<UsableItemBase>
     };
 
     [Preserve]
-    public override void Deserialize(ref MemoryPackReader reader, scoped ref UsableItemBase? value)
+    public override void Deserialize(ref MemoryPackReader reader, scoped ref CoreUsable? value)
     {
         ushort tag;
         if (!reader.TryReadUnionHeader(out tag))
@@ -28,18 +28,18 @@ public class CustomUsableItemBaseFormatter : MemoryPackFormatter<UsableItemBase>
         {
             var type = TypeToTag.FirstOrDefault(x => x.Value == tag);
             if (type.Value != tag)
-                MemoryPackSerializationException.ThrowInvalidTag(tag, typeof(UsableItemBase));
+                MemoryPackSerializationException.ThrowInvalidTag(tag, typeof(CoreUsable));
             else
             {
                 var oValue = (object?)value;
                 reader.GetFormatter(type.Key).Deserialize(ref reader, ref oValue);
-                value = (UsableItemBase?)oValue;
+                value = (CoreUsable?)oValue;
             }
         }
     }
 
     [Preserve]
-    public override void Serialize<TBufferWriter>(ref MemoryPackWriter<TBufferWriter> writer, scoped ref UsableItemBase? value)
+    public override void Serialize<TBufferWriter>(ref MemoryPackWriter<TBufferWriter> writer, scoped ref CoreUsable? value)
     {
         if (value == null)
         {
@@ -50,7 +50,7 @@ public class CustomUsableItemBaseFormatter : MemoryPackFormatter<UsableItemBase>
             bool Success = TypeToTag.TryGetValue(value.GetType(), out ushort tag);
             if (!Success)
             {
-                MemoryPackSerializationException.ThrowNotFoundInUnionType(value.GetType(), typeof(UsableItemBase));
+                MemoryPackSerializationException.ThrowNotFoundInUnionType(value.GetType(), typeof(CoreUsable));
             }
             else
             {

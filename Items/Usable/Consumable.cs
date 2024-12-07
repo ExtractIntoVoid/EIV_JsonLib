@@ -4,7 +4,7 @@ using MemoryPack;
 namespace EIV_JsonLib;
 
 [MemoryPackable]
-public partial class Consumable : UsableItemBase
+public partial class Consumable : CoreUsable
 {
     public uint MaxUses { get; set; }
     public int EnergyRestore { get; set; }

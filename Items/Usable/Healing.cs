@@ -4,7 +4,7 @@ using MemoryPack;
 namespace EIV_JsonLib;
 
 [MemoryPackable]
-public partial class Healing : UsableItemBase
+public partial class Healing : CoreUsable
 {
     public int HealAmount { get; set; }
     public List<SideEffect> SideEffects { get; set; } = [];

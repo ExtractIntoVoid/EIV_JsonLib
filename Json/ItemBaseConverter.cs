@@ -4,9 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace EIV_JsonLib.Json;
 
-public class ItemBaseConverter : JsonConverter<ItemBase>
+public class ItemBaseConverter : JsonConverter<CoreItem>
 {
-    public override ItemBase? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override CoreItem? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var clone = JsonDocument.ParseValue(ref reader).RootElement.Clone();
         if (!clone.TryGetProperty("ItemType", out var ItemTypeElement))
@@ -17,10 +17,10 @@ public class ItemBaseConverter : JsonConverter<ItemBase>
         if (converter == null)
             throw new JsonException("CoreConverters could not find any type to convert to.");
         var info = options.GetTypeInfo(converter.GetType(ItemType)!);
-        return (ItemBase?)JsonSerializer.Deserialize(clone, info);
+        return (CoreItem?)JsonSerializer.Deserialize(clone, info);
     }
 
-    public override void Write(Utf8JsonWriter writer, ItemBase value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, CoreItem value, JsonSerializerOptions options)
     {
         throw new NotImplementedException();
     }

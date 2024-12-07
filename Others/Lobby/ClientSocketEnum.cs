@@ -55,13 +55,17 @@ public enum ClientSocketEnum
     /// </summary>
     FriendSearchResponse,
     /// <summary>
-    /// Adding / Removing a friend / invite
+    /// Adding / Removing a friend invite
     /// </summary>
-    FriendAction,
+    FriendAddOrRemove,
+    /// <summary>
+    /// Accepting or Denying a friend request
+    /// </summary>
+    FriendRequest,
     /// <summary>
     /// Adding, removing users in the blocklist.
     /// </summary>
     BlockListUpdate,
     // More soon
-    
+
 }

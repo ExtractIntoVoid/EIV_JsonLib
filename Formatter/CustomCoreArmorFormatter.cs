@@ -5,27 +5,17 @@ using MemoryPack.Internal;
 namespace EIV_JsonLib.Formatter;
 
 [Preserve]
-public class CustomItemBaseFormatter : MemoryPackFormatter<ItemBase>
+public class CustomCoreArmorFormatter : MemoryPackFormatter<CoreArmor>
 {
     public static Dictionary<Type, ushort> TypeToTag = new()
     {
-        { typeof(UsableItemBase), 0 },
-        { typeof(ArmorBase), 1 },
-        // Add more "Base" Like after this
-
-        // Regular items.
-        { typeof(Backpack), 2 },
-        { typeof(Ammo), 3 },
-        { typeof(Magazine), 4 },
-        { typeof(GunMod), 5 },
-        { typeof(ArmorPlate), 6 },
+        { typeof(Rig), 0 },
+        { typeof(Helmet), 1 },
+        { typeof(Vest), 2 },
     };
 
-    public static ushort LastTag => TypeToTag.Last().Value;
-    public static ushort LastAvailable => (ushort)(TypeToTag.Last().Value + 1);
-
     [Preserve]
-    public override void Deserialize(ref MemoryPackReader reader, scoped ref ItemBase? value)
+    public override void Deserialize(ref MemoryPackReader reader, scoped ref CoreArmor? value)
     {
         ushort tag;
         if (!reader.TryReadUnionHeader(out tag))
@@ -36,18 +26,18 @@ public class CustomItemBaseFormatter : MemoryPackFormatter<ItemBase>
         {
             var type = TypeToTag.FirstOrDefault(x => x.Value == tag);
             if (type.Value != tag)
-                MemoryPackSerializationException.ThrowInvalidTag(tag, typeof(ItemBase));
+                MemoryPackSerializationException.ThrowInvalidTag(tag, typeof(CoreArmor));
             else
             {
                 var oValue = (object?)value;
                 reader.GetFormatter(type.Key).Deserialize(ref reader, ref oValue);
-                value = (ItemBase?)oValue;
+                value = (CoreArmor?)oValue;
             }
-        }        
+        }
     }
 
     [Preserve]
-    public override void Serialize<TBufferWriter>(ref MemoryPackWriter<TBufferWriter> writer, scoped ref ItemBase? value)
+    public override void Serialize<TBufferWriter>(ref MemoryPackWriter<TBufferWriter> writer, scoped ref CoreArmor? value)
     {
         if (value == null)
         {
@@ -58,7 +48,7 @@ public class CustomItemBaseFormatter : MemoryPackFormatter<ItemBase>
             bool Success = TypeToTag.TryGetValue(value.GetType(), out ushort tag);
             if (!Success)
             {
-                MemoryPackSerializationException.ThrowNotFoundInUnionType(value.GetType(), typeof(ItemBase));
+                MemoryPackSerializationException.ThrowNotFoundInUnionType(value.GetType(), typeof(CoreArmor));
             }
             else
             {

@@ -4,7 +4,7 @@ using MemoryPack;
 namespace EIV_JsonLib;
 
 [MemoryPackable]
-public partial class Magazine : ItemBase
+public partial class Magazine : CoreItem
 {
     public List<string> Ammunitions { get ; set ; } = [];
     public uint MaxMagSize { get ; set ; }

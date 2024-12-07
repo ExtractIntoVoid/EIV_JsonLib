@@ -5,7 +5,7 @@ using MemoryPack;
 namespace EIV_JsonLib;
 
 [MemoryPackable]
-public partial class Melee : UsableItemBase, IDamageDealer
+public partial class Melee : CoreUsable, IDamageDealer
 {
     public uint Damage { get; set; }
     public uint ArmorDamage { get; set; }

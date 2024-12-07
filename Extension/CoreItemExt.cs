@@ -3,15 +3,15 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_JsonLib.Extension;
 
-public static partial class ItemBaseExt
+public static partial class CoreItemExt
 {
-    public static bool Is<T>(this ItemBase item) where T : ItemBase => item is T;
+    public static bool Is<T>(this CoreItem item) where T : CoreItem => item is T;
 
-    public static T? As<T>(this ItemBase item) where T : ItemBase => item.Is<T>() ? (T)item : default;
+    public static T? As<T>(this CoreItem item) where T : CoreItem => item.Is<T>() ? (T)item : default;
 
-    public static bool HasProperty(this ItemBase item, [DisallowNull] string value) => item.GetType().GetProperty(value) != null;
+    public static bool HasProperty(this CoreItem item, [DisallowNull] string value) => item.GetType().GetProperty(value) != null;
 
-    public static T? GetProperty<T>(this ItemBase item, [DisallowNull] string value)
+    public static T? GetProperty<T>(this CoreItem item, [DisallowNull] string value)
     {
         if (!item.HasProperty(value))
             return default;
@@ -20,7 +20,7 @@ public static partial class ItemBaseExt
         return (T?)item.GetType().GetProperty(value)!.GetValue(item);
     }
 
-    public static bool ChangeProperty(this ItemBase item, [DisallowNull] string valueName, KVChange kv)
+    public static bool ChangeProperty(this CoreItem item, [DisallowNull] string valueName, KVChange kv)
     {
         if (!item.HasProperty(valueName))
             return false;

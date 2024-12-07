@@ -2,6 +2,6 @@
 
 public class ConnectResponse
 {
-    public Guid Id { get; set; }
-    public string Ticket { get; set; } = string.Empty;
+    public required Guid Id { get; set; }
+    public required string Ticket { get; set; }
 }

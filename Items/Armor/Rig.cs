@@ -4,7 +4,7 @@ using MemoryPack;
 namespace EIV_JsonLib;
 
 [MemoryPackable]
-public partial class Rig : ArmorBase
+public partial class Rig : CoreArmor
 {
     public List<string> ItemIds { get; set; } = [];
     public string? PlateSlotId { get; set; }

@@ -5,7 +5,7 @@ using MemoryPack;
 namespace EIV_JsonLib;
 
 [MemoryPackable]
-public partial class Ammo : ItemBase, IDamageDealer
+public partial class Ammo : CoreItem, IDamageDealer
 {
     public decimal Speed { get; set; }
     public uint Damage { get; set; }

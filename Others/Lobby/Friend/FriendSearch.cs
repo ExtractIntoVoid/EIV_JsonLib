@@ -2,5 +2,5 @@
 
 public class FriendSearch
 {
-    public string SearchParam { get; set; } = string.Empty;
+    public required string SearchParam { get; set; }
 }

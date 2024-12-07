@@ -8,19 +8,19 @@ public static class FormatterInitializer
 {
     public static void RegisterFormatter()
     {
-        if (!MemoryPackFormatterProvider.IsRegistered<ItemBase>())
+        if (!MemoryPackFormatterProvider.IsRegistered<CoreItem>())
         {
-            MemoryPackFormatterProvider.Register(new CustomItemBaseFormatter());
+            MemoryPackFormatterProvider.Register(new CustomCoreItemFormatter());
         }
 
-        if (!MemoryPackFormatterProvider.IsRegistered<UsableItemBase>())
+        if (!MemoryPackFormatterProvider.IsRegistered<CoreUsable>())
         {
-            MemoryPackFormatterProvider.Register(new CustomUsableItemBaseFormatter());
+            MemoryPackFormatterProvider.Register(new CustomCoreUsableFormatter());
         }
 
-        if (!MemoryPackFormatterProvider.IsRegistered<ArmorBase>())
+        if (!MemoryPackFormatterProvider.IsRegistered<CoreArmor>())
         {
-            MemoryPackFormatterProvider.Register(new CustomArmorBaseFormatter());
+            MemoryPackFormatterProvider.Register(new CustomCoreArmorFormatter());
         }
     }
 }

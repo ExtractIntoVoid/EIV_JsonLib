@@ -6,7 +6,7 @@ namespace EIV_JsonLib.Json;
 
 public static class ConvertHelper
 {
-    public static ItemBase? ConvertFromString(this string json, List<JsonConverter>? converters = null)
+    public static CoreItem? ConvertFromString(this string json, List<JsonConverter>? converters = null)
     {
         converters ??= [];
         var settings = GetSerializerSettings();
@@ -14,7 +14,7 @@ public static class ConvertHelper
         {
             settings.Converters.Add(item);
         }
-        return JsonSerializer.Deserialize<ItemBase>(json, settings);
+        return JsonSerializer.Deserialize<CoreItem>(json, settings);
     }
 
     public static JsonSerializerOptions GetSerializerSettings()

@@ -2,6 +2,6 @@
 
 public class FriendAction
 {
-    public string UserId { get; set; } = string.Empty;
+    public required string UserId { get; set; }
     public bool ToRemove { get; set; }
 }

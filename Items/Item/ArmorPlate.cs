@@ -5,7 +5,7 @@ using MemoryPack;
 namespace EIV_JsonLib;
 
 [MemoryPackable]
-public partial class ArmorPlate : ItemBase, IDurable
+public partial class ArmorPlate : CoreItem, IDurable
 {
     public string Material { get; set; } = string.Empty;
     public uint Durability { get; set; }
