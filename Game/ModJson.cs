@@ -18,8 +18,6 @@ public class ModJson
     /// Version of the Mod. Please use Semantic Versioning!
     /// </summary>
     public string Version { get; set; } = string.Empty;
-    // Internal Name | Version (* if you dont care about it) - WITH EIV.
-    // For C# Dependencies just drop those into /Mods/Dependencies folder.
     /// <summary>
     /// Other Mod Dependencies (if exists) for the Mod. 
     /// <br>Key must be <see cref="InternalName"/>. Value must be the <see cref="Version"/>.</br>

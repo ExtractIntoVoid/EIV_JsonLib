@@ -11,5 +11,7 @@ public partial class Gun : CoreUsable
 
     [MemoryPackAllowSerialize]
     public Magazine? Magazine { get ; set ; }
+
+    [MemoryPackAllowSerialize]
     public List<GunMod> GunMods { get; set; } = [];
 }

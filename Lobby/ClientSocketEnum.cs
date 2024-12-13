@@ -66,6 +66,18 @@ public enum ClientSocketEnum
     /// Adding, removing users in the blocklist.
     /// </summary>
     BlockListUpdate,
+    /// <summary>
+    /// Moving any item to its place.
+    /// </summary>
+    MoveItemAction,
+    /// <summary>
+    /// Consume the item.
+    /// </summary>
+    ConsumeItemAction,
+    /// <summary>
+    /// Discard the item.
+    /// </summary>
+    DiscardItemAction,
     // More soon
 
 }

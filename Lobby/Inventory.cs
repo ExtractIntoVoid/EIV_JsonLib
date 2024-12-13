@@ -1,4 +1,5 @@
 ﻿using EIV_JsonLib.Base;
+using EIV_JsonLib.Interface;
 using MemoryPack;
 
 namespace EIV_JsonLib;
@@ -13,4 +14,5 @@ public partial class Inventory
     public Melee? MeleeSlot { get; set; }
     public Backpack? Backpack { get; set; }
     public List<CoreArmor> Armors { get; set; } = [];
+    public List<IWearable> Wearables { get; set; } = [];
 }
