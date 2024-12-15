@@ -54,6 +54,11 @@ public static partial class CoreItemExt
                     return false;
                 prop.SetValue(item, kv.ListStringValue);
                 break;
+            case TypeName.Double:
+                if (prop.PropertyType != typeof(double))
+                    return false;
+                prop.SetValue(item, kv.DoubleValue);
+                break;
             default:
                 break;
         }

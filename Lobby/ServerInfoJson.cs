@@ -63,7 +63,7 @@ public class GameInfo
 }
 
 /// <summary>
-/// Only shown are C# Mods, 
+/// Only shown are C# Mods.
 /// </summary>
 public class ModInfo
 {

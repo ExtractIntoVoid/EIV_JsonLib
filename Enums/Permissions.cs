@@ -1,5 +1,8 @@
 ﻿namespace EIV_JsonLib;
 
+/// <summary>
+/// Permissions for console comamnds, and special actions.
+/// </summary>
 [Flags]
 public enum Permissions : ulong
 {

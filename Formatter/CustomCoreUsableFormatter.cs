@@ -21,9 +21,7 @@ public class CustomCoreUsableFormatter : MemoryPackFormatter<CoreUsable>
     {
         ushort tag;
         if (!reader.TryReadUnionHeader(out tag))
-        {
             value = null;
-        }
         else
         {
             var type = TypeToTag.FirstOrDefault(x => x.Value == tag);
@@ -42,16 +40,12 @@ public class CustomCoreUsableFormatter : MemoryPackFormatter<CoreUsable>
     public override void Serialize<TBufferWriter>(ref MemoryPackWriter<TBufferWriter> writer, scoped ref CoreUsable? value)
     {
         if (value == null)
-        {
             writer.WriteNullUnionHeader();
-        }
         else
         {
             bool Success = TypeToTag.TryGetValue(value.GetType(), out ushort tag);
             if (!Success)
-            {
                 MemoryPackSerializationException.ThrowNotFoundInUnionType(value.GetType(), typeof(CoreUsable));
-            }
             else
             {
                 writer.WriteUnionHeader(tag);

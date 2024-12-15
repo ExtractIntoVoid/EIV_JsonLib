@@ -19,9 +19,7 @@ public class CustomCoreArmorFormatter : MemoryPackFormatter<CoreArmor>
     {
         ushort tag;
         if (!reader.TryReadUnionHeader(out tag))
-        {
             value = null;
-        }
         else
         {
             var type = TypeToTag.FirstOrDefault(x => x.Value == tag);
@@ -40,16 +38,12 @@ public class CustomCoreArmorFormatter : MemoryPackFormatter<CoreArmor>
     public override void Serialize<TBufferWriter>(ref MemoryPackWriter<TBufferWriter> writer, scoped ref CoreArmor? value)
     {
         if (value == null)
-        {
             writer.WriteNullUnionHeader();
-        }
         else
         {
             bool Success = TypeToTag.TryGetValue(value.GetType(), out ushort tag);
             if (!Success)
-            {
                 MemoryPackSerializationException.ThrowNotFoundInUnionType(value.GetType(), typeof(CoreArmor));
-            }
             else
             {
                 writer.WriteUnionHeader(tag);

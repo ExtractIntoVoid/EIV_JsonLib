@@ -62,6 +62,7 @@ public partial class KVChange
     public int? IntValue;
     public decimal? DecimalValue;
     public List<string>? ListStringValue;
+    public double? DoubleValue;
 
     public override string ToString()
     {
@@ -85,4 +86,5 @@ public enum TypeName : byte
     UInt,
     Decimal,
     List_String,
+    Double,
 }
