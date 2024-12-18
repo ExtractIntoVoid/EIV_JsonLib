@@ -7,5 +7,6 @@ namespace EIV_JsonLib;
 public partial class Healing : CoreUsable
 {
     public int HealAmount { get; set; }
+    [MemoryPackAllowSerialize]
     public List<SideEffect> SideEffects { get; set; } = [];
 }

@@ -1,4 +1,5 @@
 ﻿using MemoryPack;
+using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_JsonLib.Base;
 
@@ -6,7 +7,7 @@ namespace EIV_JsonLib.Base;
 /// Represent an Abstract Core Item.
 /// </summary>
 [MemoryPackable(GenerateType.NoGenerate)]
-public abstract partial class CoreItem : ICloneable
+public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqualityComparer<CoreItem>
 {
     /// <summary>
     /// A Unique Id/Name for the Item
@@ -56,6 +57,42 @@ public abstract partial class CoreItem : ICloneable
 
     public override int GetHashCode()
     {
-        return Id.GetHashCode() ^ ItemType.GetHashCode() ^ Weight.GetHashCode() + Volume.GetHashCode() - AssetPath.GetHashCode();
+        int hash = 0;
+        if (!string.IsNullOrEmpty(Id))
+            hash += Id.GetHashCode();
+        if (!string.IsNullOrEmpty(ItemType))
+            hash += ItemType.GetHashCode();
+        hash += Weight.GetHashCode();
+        hash += Volume.GetHashCode();
+        if (!string.IsNullOrEmpty(AssetPath))
+            hash += AssetPath.GetHashCode();
+        if (Tags.Count != 0)
+            hash += (int)Tags.Select(x => x.GetHashCode()).Average();
+        return hash;
+    }
+
+    public bool Equals(CoreItem? other)
+    {
+        if (other == null)
+            return false;
+        return this.GetHashCode() == other.GetHashCode();
+    }
+
+    public bool Equals(CoreItem? x, CoreItem? y)
+    {
+        if (x == null && y == null)
+            return true;
+        if (x == null)
+            return false;
+        if (y == null)
+            return false;
+        return x.GetHashCode() == y.GetHashCode();
+    }
+
+    public int GetHashCode([DisallowNull] CoreItem obj)
+    {
+        if (obj == null)
+            return 0;
+        return obj.GetHashCode();
     }
 }

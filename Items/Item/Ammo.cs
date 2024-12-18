@@ -1,5 +1,5 @@
 ﻿using EIV_JsonLib.Base;
-using EIV_JsonLib.Interface;
+using EIV_JsonLib.Interfaces;
 using MemoryPack;
 
 namespace EIV_JsonLib;

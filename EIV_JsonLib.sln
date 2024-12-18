@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EIV_JsonLib", "EIV_JsonLib.csproj", "{4EF80C1D-C1BB-46BA-80A8-4D54EC312D67}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "..\TestApp\TestApp.csproj", "{88778C8E-335D-46EC-9DC4-77540B318B7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4EF80C1D-C1BB-46BA-80A8-4D54EC312D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EF80C1D-C1BB-46BA-80A8-4D54EC312D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EF80C1D-C1BB-46BA-80A8-4D54EC312D67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88778C8E-335D-46EC-9DC4-77540B318B7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88778C8E-335D-46EC-9DC4-77540B318B7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88778C8E-335D-46EC-9DC4-77540B318B7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88778C8E-335D-46EC-9DC4-77540B318B7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

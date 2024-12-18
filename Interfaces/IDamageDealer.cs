@@ -1,6 +1,9 @@
-﻿namespace EIV_JsonLib.Interface;
+﻿using MemoryPack;
 
-public interface IDamageDealer
+namespace EIV_JsonLib.Interfaces;
+
+[MemoryPackable(GenerateType.NoGenerate)]
+public partial interface IDamageDealer
 {
     /// <summary>
     /// How much Damage does this Item do.

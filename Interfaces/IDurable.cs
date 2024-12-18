@@ -1,6 +1,9 @@
-﻿namespace EIV_JsonLib.Interface;
+﻿using MemoryPack;
 
-public interface IDurable
+namespace EIV_JsonLib.Interfaces;
+
+[MemoryPackable(GenerateType.NoGenerate)]
+public partial interface IDurable
 {
     /// <summary>
     /// How long the item "live" until wown off.

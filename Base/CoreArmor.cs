@@ -1,4 +1,4 @@
-﻿using EIV_JsonLib.Interface;
+﻿using EIV_JsonLib.Interfaces;
 using MemoryPack;
 
 namespace EIV_JsonLib.Base;
@@ -14,4 +14,13 @@ public abstract partial class CoreArmor : CoreItem, IWearable
     /// </summary>
     public decimal BlockEfficacy { get; set; }
     public string Slot { get; set; } = string.Empty;
+
+    public override int GetHashCode()
+    {
+        int hash = base.GetHashCode();
+        hash += BlockEfficacy.GetHashCode();
+        if (!string.IsNullOrEmpty(Slot))
+            hash += Slot.GetHashCode();
+        return hash;
+    }
 }

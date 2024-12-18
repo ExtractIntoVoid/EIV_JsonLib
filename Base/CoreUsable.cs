@@ -16,4 +16,9 @@ public abstract partial class CoreUsable : CoreItem
     /// How long does it need to actually use this Item
     /// </summary>
     public decimal UseTime { get; set; }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode() + CanUse.GetHashCode() + UseTime.GetHashCode();
+    }
 }

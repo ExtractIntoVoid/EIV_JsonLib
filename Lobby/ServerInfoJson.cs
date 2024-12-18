@@ -63,12 +63,11 @@ public class GameInfo
 }
 
 /// <summary>
-/// Only shown are C# Mods.
+/// Mod Information to download to client.
 /// </summary>
 public class ModInfo
 {
     public string ModName { get; set; } = string.Empty;
-    public string Version { get; set; } = string.Empty;
     public string Hash { get; set; } = string.Empty;
     public string URL { get; set; } = string.Empty;
 }

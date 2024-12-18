@@ -39,6 +39,7 @@ public partial class ItemRecreator
     public uint Amount { get; set; } = 1;
 
     [MemoryPackOrder(2)]
+    [MemoryPackAllowSerialize]
     public List<ItemRecreator> Contained { get; set; } = [];
 
     [MemoryPackOrder(3)]

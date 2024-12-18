@@ -9,6 +9,7 @@ public partial class Stash
     public uint MaxSize { get; set; }
     public uint MaxWeight { get; set; }
     public decimal MaxVolume { get; set; }
+    [MemoryPackAllowSerialize]
     public List<CoreItem> Items { get; set; } = [];
 
     public override int GetHashCode()
