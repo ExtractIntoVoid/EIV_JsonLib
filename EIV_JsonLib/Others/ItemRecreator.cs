@@ -52,6 +52,20 @@ public partial class ItemRecreator
     {
         return $"ItemBaseID: {ItemBaseID}, Amount: {Amount}, Slot: {Slot}, ChangedValues: {ChangedValues.Count}";
     }
+
+    public override int GetHashCode()
+    {
+        int hash = 0;
+        if (!string.IsNullOrEmpty(ItemBaseID))
+            hash += ItemBaseID.GetHashCode();
+        hash += Amount.GetHashCode();
+        if (Contained.Count != 0)
+            hash += (int)Contained.Select(x => x.GetHashCode()).Average();
+        hash += Slot.GetHashCode();
+        if (ChangedValues.Count != 0)
+            hash += (int)ChangedValues.Select(x => x.Key.GetHashCode() + x.Value.GetHashCode()).Average();
+        return hash;
+    }
 }
 
 [MemoryPackable]
@@ -68,6 +82,24 @@ public partial class KVChange
     public override string ToString()
     {
         return $"AvailableTypeName: {AvailableTypeName.ToString()} String? {StringValue}, Uint? {UIntValue}, Int? {IntValue}, Dec? {DecimalValue}, ListString? {ListStringValue}";
+    }
+
+    public override int GetHashCode()
+    {
+        int hash = AvailableTypeName.GetHashCode();
+        if (ListStringValue != null && ListStringValue.Count != 0)
+            hash += (int)ListStringValue.Select(x => x.GetHashCode()).Average();
+        if (!string.IsNullOrEmpty(StringValue))
+            hash += StringValue.GetHashCode();
+        if (UIntValue != null)
+            hash += UIntValue.GetHashCode();
+        if (IntValue != null)
+            hash += IntValue.GetHashCode();
+        if (DecimalValue != null)
+            hash += DecimalValue.GetHashCode();
+        if (DoubleValue != null)
+            hash += DoubleValue.GetHashCode();
+        return hash;
     }
 }
 
