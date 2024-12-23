@@ -1,16 +1,16 @@
 ﻿using EIV_JsonLib.Base;
+using EIV_JsonLib.Interfaces;
 using MemoryPack;
 using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_JsonLib;
 
 [MemoryPackable]
-public partial class Stash : IEquatable<Stash>, IEqualityComparer<Stash>
+public partial class Stash : IEquatable<Stash>, IEqualityComparer<Stash>, IStorage
 {
     public uint MaxSize { get; set; }
-    public uint MaxWeight { get; set; }
+    public decimal MaxWeight { get; set; }
     public decimal MaxVolume { get; set; }
-
     [MemoryPackAllowSerialize]
     public List<CoreItem> Items { get; set; } = [];
 

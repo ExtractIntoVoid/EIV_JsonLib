@@ -5,10 +5,10 @@ using MemoryPack;
 namespace EIV_JsonLib;
 
 [MemoryPackable]
-public partial class Backpack : CoreItem, IWearable
+public partial class Backpack : CoreItem, IWearable, IStorage
 {
     public uint MaxSize { get; set; }
-    public uint MaxWeight { get; set; }
+    public decimal MaxWeight { get; set; }
     public decimal MaxVolume { get; set; }
 
     [MemoryPackAllowSerialize]

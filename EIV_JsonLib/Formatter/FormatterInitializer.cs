@@ -15,6 +15,7 @@ public static class FormatterInitializer
     public static CustomFormatter<IDamageDealer> IDamageDealer_Formatter = new();
     public static CustomFormatter<IDurable> IDurable_Formatter = new();
     public static CustomFormatter<IWearable> IWearable_Formatter = new();
+    public static CustomFormatter<IStorage> IStorage_Formatter = new();
 
     /// <summary>
     /// Register Core Formatters if the type is not registered yet.
@@ -107,6 +108,16 @@ public static class FormatterInitializer
             IWearable_Formatter.AddToTag<CoreArmor>();
             IWearable_Formatter.AddToTag<Backpack>();
             MemoryPackFormatterProvider.Register(IWearable_Formatter);
+        }
+
+        // IWearable
+        if (!MemoryPackFormatterProvider.IsRegistered<IStorage>())
+        {
+            IStorage_Formatter = new();
+            IStorage_Formatter.AddToTag<Rig>();
+            IStorage_Formatter.AddToTag<Backpack>();
+            IStorage_Formatter.AddToTag<Stash>();
+            MemoryPackFormatterProvider.Register(IStorage_Formatter);
         }
     }
 }
