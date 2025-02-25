@@ -20,7 +20,7 @@ public partial class Effect
     [MemoryPackAllowSerialize]
     public StrengthEffect Strength { get; set; } = new();
 
-    public List<string> AppliedFrom { get; set; } = new();
+    public List<string> AppliedFrom { get; set; } = [];
 
     public object Clone()
     {

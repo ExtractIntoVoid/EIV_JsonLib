@@ -1,10 +1,9 @@
 ﻿using MemoryPack;
-using EIV_JsonLib.Formatter;
 using EIV_JsonLib.Base;
 using EIV_JsonLib.Profile.ProfileModules;
 using EIV_JsonLib.Interfaces;
 
-namespace EIV_JsonLib;
+namespace EIV_JsonLib.Formatter;
 
 public static class FormatterInitializer
 {

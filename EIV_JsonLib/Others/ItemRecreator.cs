@@ -81,7 +81,7 @@ public partial class KVChange
 
     public override string ToString()
     {
-        return $"AvailableTypeName: {AvailableTypeName.ToString()} String? {StringValue}, Uint? {UIntValue}, Int? {IntValue}, Dec? {DecimalValue}, ListString? {ListStringValue}";
+        return $"AvailableTypeName: {AvailableTypeName} String? {StringValue}, Uint? {UIntValue}, Int? {IntValue}, Dec? {DecimalValue}, ListString? {ListStringValue}";
     }
 
     public override int GetHashCode()

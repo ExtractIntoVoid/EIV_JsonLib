@@ -45,4 +45,9 @@ public abstract partial class CoreUsable : CoreItem, IEquatable<CoreUsable>, IEq
     {
         return obj.GetHashCode();
     }
+
+    public override bool Equals(object? obj)
+    {
+        return Equals(obj as CoreUsable);
+    }
 }

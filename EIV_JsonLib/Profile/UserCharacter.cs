@@ -54,4 +54,9 @@ public partial class UserCharacter : IEquatable<UserCharacter>, IEqualityCompare
     {
         return obj.GetHashCode();
     }
+
+    public override bool Equals(object? obj)
+    {
+        return Equals(obj as UserCharacter);
+    }
 }

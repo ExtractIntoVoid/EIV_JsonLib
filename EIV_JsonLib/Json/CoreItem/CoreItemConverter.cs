@@ -13,9 +13,7 @@ public class CoreItemConverter : JsonConverter<CoreItem>
             throw new JsonException("ItemType not found!");
         string? ItemType = ItemTypeElement.GetString();
         ArgumentNullException.ThrowIfNull(ItemType);
-        var converter = CoreConverters.Converters.FirstOrDefault(x => x.GetType(ItemType) != null);
-        if (converter == null)
-            throw new JsonException("CoreConverters could not find any type to convert to.");
+        var converter = CoreConverters.Converters.FirstOrDefault(x => x.GetType(ItemType) != null) ?? throw new JsonException("CoreConverters could not find any type to convert to.");
         var info = options.GetTypeInfo(converter.GetType(ItemType)!);
         return (CoreItem?)JsonSerializer.Deserialize(clone, info);
     }

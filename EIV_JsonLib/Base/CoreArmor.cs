@@ -47,4 +47,9 @@ public abstract partial class CoreArmor : CoreItem, IWearable, IEquatable<CoreAr
     {
         return obj.GetHashCode();
     }
+
+    public override bool Equals(object? obj)
+    {
+        return Equals(obj as CoreArmor);
+    }
 }

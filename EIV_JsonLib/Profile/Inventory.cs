@@ -62,4 +62,9 @@ public partial class Inventory : IEquatable<Inventory>, IEqualityComparer<Invent
             return 0;
         return obj.GetHashCode();
     }
+
+    public override bool Equals(object? obj)
+    {
+        return Equals(obj as Inventory);
+    }
 }

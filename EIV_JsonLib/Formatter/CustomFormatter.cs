@@ -22,8 +22,7 @@ public class CustomFormatter<T> : MemoryPackFormatter<T>
 
     public override void Deserialize(ref MemoryPackReader reader, scoped ref T? value)
     {
-        ushort tag;
-        if (!reader.TryReadUnionHeader(out tag))
+        if (!reader.TryReadUnionHeader(out ushort tag))
             value = default;
         else
         {

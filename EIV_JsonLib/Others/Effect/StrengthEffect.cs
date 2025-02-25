@@ -7,5 +7,5 @@ public partial class StrengthEffect
 {
     public int Min { get; set; }
     public int Max { get; set; }
-    public List<string> ApplyTo { get; set; } = new();
+    public List<string> ApplyTo { get; set; } = [];
 }

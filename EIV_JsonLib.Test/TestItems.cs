@@ -1,5 +1,6 @@
 ﻿using EIV_JsonLib.Base;
 using EIV_JsonLib.Extension;
+using EIV_JsonLib.Formatter;
 using System.Text.Json;
 
 namespace EIV_JsonLib.Test;
@@ -29,21 +30,24 @@ public class TestItems
             AmmoSupported = ["sdfsf"],
             Volume = 66
         };
-        Gun gun3 = new Gun()
+        Gun gun3 = new()
         {
             Id = "Gun",
             ItemType = nameof(Gun),
             AmmoSupported = ["sdfsf"],
             Volume = 66
         };
-        Assert.That(gun2, Is.EqualTo(gun));
-        Assert.That(gun3, Is.EqualTo(gun));
+        Assert.Multiple(() =>
+        {
+            Assert.That(gun2, Is.EqualTo(gun));
+            Assert.That(gun3, Is.EqualTo(gun));
+        });
     }
 
     [Test]
     public void TestItemContainsOtherItem()
     {
-        Gun gun = new Gun()
+        Gun gun = new()
         {
             Id = "Gun",
             ItemType = nameof(Gun),
@@ -53,17 +57,17 @@ public class TestItems
             {
                 Id = "TestMag",
                 ItemType = nameof(Magazine),
-                Ammunitions = new(),
+                Ammunitions = [],
                 Weight = 7456.99M
             }
         };
-        Assert.IsNotNull(gun.Magazine);
-        Assert.That(gun.Magazine!.Ammunitions.Count, Is.EqualTo(0));
+        Assert.That(gun.Magazine, Is.Not.Null);
+        Assert.That(gun.Magazine!.Ammunitions, Is.Empty);
         var ser = gun.Serialize();
-        Assert.IsNotNull(ser);
-        Assert.IsNotEmpty(ser);
+        Assert.That(ser, Is.Not.Null);
+        Assert.That(ser, Is.Not.Empty);
         var NewGun = ser.Deserialize<Gun>();
-        Assert.IsNotNull(NewGun);
+        Assert.That(NewGun, Is.Not.Null);
         Assert.That(NewGun, Is.EqualTo(gun));
         NewGun!.Magazine!.Ammunitions.Add(new Ammo()
         { 

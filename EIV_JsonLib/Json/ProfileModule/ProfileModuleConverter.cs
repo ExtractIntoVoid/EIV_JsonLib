@@ -13,9 +13,7 @@ public class ProfileModuleConverter : JsonConverter<IProfileModule>
             throw new JsonException("ModuleType not found!");
         string? ModuleType = ModuleTypeElement.GetString();
         ArgumentNullException.ThrowIfNull(ModuleType);
-        var converter = CoreConverters.Converters.FirstOrDefault(x => x.GetType(ModuleType) != null);
-        if (converter == null)
-            throw new JsonException("CoreConverters could not find any type to convert to.");
+        var converter = CoreConverters.Converters.FirstOrDefault(x => x.GetType(ModuleType) != null) ?? throw new JsonException("CoreConverters could not find any type to convert to.");
         var info = options.GetTypeInfo(converter.GetType(ModuleType)!);
         var module = (IProfileModule?)JsonSerializer.Deserialize(clone, info);
         if (module != null)
@@ -32,8 +30,7 @@ public class ProfileModuleConverter : JsonConverter<IProfileModule>
 
     public string NameWithGenerics(Type type)
     {
-        if (type == null)
-            throw new ArgumentNullException(nameof(type));
+        ArgumentNullException.ThrowIfNull(type);
 
         if (type.IsArray)
             return $"{type.GetElementType()?.Name}[]";
@@ -43,7 +40,7 @@ public class ProfileModuleConverter : JsonConverter<IProfileModule>
 
         var name = type.GetGenericTypeDefinition().Name;
         var index = name.IndexOf('`');
-        var newName = index == -1 ? name : name.Substring(0, index);
+        var newName = index == -1 ? name : name[..index];
 
         var list = type.GetGenericArguments().Select(NameWithGenerics).ToList();
         return $"{newName}|{string.Join(",", list)}";

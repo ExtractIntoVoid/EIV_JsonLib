@@ -3,6 +3,7 @@ using EIV_JsonLib.Profile;
 using EIV_JsonLib.Extension;
 using System.Text.Json;
 using EIV_JsonLib.Json;
+using EIV_JsonLib.Formatter;
 
 namespace EIV_JsonLib.Test;
 
@@ -20,16 +21,19 @@ public class TestProfile
         UserCharacter User = new()
         {
             Name = "Test",
-            Modules = new(),
+            Modules = [],
             Inventory = new(),
         };
-        Assert.That(User.Name, Is.EqualTo("Test"));
-        Assert.That(User.Origin, Is.EqualTo(string.Empty));
-        Assert.That(User.CreationDate, Is.EqualTo(DateTimeOffset.MinValue));
-        Assert.That(User.Modules.Count, Is.EqualTo(0));
-        Assert.That(User.Inventory.Hand, Is.EqualTo(null));
-        Assert.That(User.Inventory.Wearables.Count, Is.EqualTo(0));
-        Assert.That(User.Inventory.ToolBelt.Count, Is.EqualTo(0));
+        Assert.Multiple(() =>
+        {
+            Assert.That(User.Name, Is.EqualTo("Test"));
+            Assert.That(User.Origin, Is.EqualTo(string.Empty));
+            Assert.That(User.CreationDate, Is.EqualTo(DateTimeOffset.MinValue));
+            Assert.That(User.Modules, Is.Empty);
+            Assert.That(User.Inventory.Hand, Is.EqualTo(null));
+            Assert.That(User.Inventory.Wearables, Is.Empty);
+            Assert.That(User.Inventory.ToolBelt, Is.Empty);
+        });
     }
 
     [Test]
@@ -38,7 +42,7 @@ public class TestProfile
         UserCharacter? User = new()
         {
             Name = "Test",
-            Modules = new(),
+            Modules = [],
             Inventory = new(),
         };
         User.Modules.Add(new MinMaxValueModule<int>()
@@ -82,21 +86,27 @@ public class TestProfile
                 }
             }
         });
-        Assert.That(User.Modules.Count, Is.EqualTo(5));
+        Assert.That(User.Modules, Has.Count.EqualTo(5));
         StatusEffectModule? statusEffectModule = User.GetProfileModule<StatusEffectModule>("StatusEffects");
-        Assert.IsNotNull(statusEffectModule);
-        Assert.That(statusEffectModule!.Effects.Count, Is.EqualTo(1));
-        Assert.IsNull(User.GetProfileModule<StatusEffectModule>("Null"));
+        Assert.That(statusEffectModule, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(statusEffectModule!.Effects, Has.Count.EqualTo(1));
+            Assert.That(User.GetProfileModule<StatusEffectModule>("Null"), Is.Null);
+        });
         MinMaxValueModule<int>? Health = User.GetProfileModule<MinMaxValueModule<int>>("Health");
-        Assert.IsNotNull(Health);
+        Assert.That(Health, Is.Not.Null);
         Assert.That(Health!.Value, Is.EqualTo(100));
         Health.Value = 200;
         Assert.That(Health!.Value, Is.EqualTo(200));
         Health = User.GetProfileModule<MinMaxValueModule<int>>("Health");
-        Assert.IsNotNull(Health);
-        Assert.That(Health!.Value, Is.EqualTo(200));
-        Assert.That(User.IsProfileModuleNameExist("MustNotExists"), Is.EqualTo(false));
-        Assert.That(User.IsProfileModuleNameExist("Health"), Is.EqualTo(true));
+        Assert.That(Health, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(Health!.Value, Is.EqualTo(200));
+            Assert.That(User.IsProfileModuleNameExist("MustNotExists"), Is.EqualTo(false));
+            Assert.That(User.IsProfileModuleNameExist("Health"), Is.EqualTo(true));
+        });
     }
 
     [Test]
@@ -105,13 +115,13 @@ public class TestProfile
         UserCharacter User = new()
         {
             Name = "Test",
-            Modules = new(),
+            Modules = [],
             Inventory = new(),
         };
         var SerUser = User.Serialize();
-        Assert.IsNotNull(SerUser);
+        Assert.That(SerUser, Is.Not.Null);
         var DeserUser = SerUser.Deserialize<UserCharacter>();
-        Assert.IsNotNull(DeserUser);
+        Assert.That(DeserUser, Is.Not.Null);
         Assert.That(DeserUser, Is.EqualTo(User));
         User.Modules.Add(new MinMaxValueModule<int>()
         {
@@ -122,15 +132,15 @@ public class TestProfile
             ModuleType = nameof(MinMaxValueModule<int>)
         });
         SerUser = User.Serialize();
-        Assert.IsNotNull(SerUser);
+        Assert.That(SerUser, Is.Not.Null);
         DeserUser = SerUser.Deserialize<UserCharacter>();
-        Assert.IsNotNull(DeserUser);
+        Assert.That(DeserUser, Is.Not.Null);
         Assert.That(DeserUser, Is.EqualTo(User));
         User.CreationDate = DateTimeOffset.Now;
         SerUser = User.Serialize();
-        Assert.IsNotNull(SerUser);
+        Assert.That(SerUser, Is.Not.Null);
         DeserUser = SerUser.Deserialize<UserCharacter>();
-        Assert.IsNotNull(DeserUser);
+        Assert.That(DeserUser, Is.Not.Null);
         Assert.That(DeserUser, Is.EqualTo(User));
         User.Inventory.Hand = new Gun()
         {
@@ -138,9 +148,9 @@ public class TestProfile
             ItemType = nameof(Gun),
         };
         SerUser = User.Serialize();
-        Assert.IsNotNull(SerUser);
+        Assert.That(SerUser, Is.Not.Null);
         DeserUser = SerUser.Deserialize<UserCharacter>();
-        Assert.IsNotNull(DeserUser);
+        Assert.That(DeserUser, Is.Not.Null);
         Assert.That(DeserUser, Is.EqualTo(User));
     }
 
@@ -151,18 +161,21 @@ public class TestProfile
         UserCharacter User = new()
         {
             Name = "Test",
-            Modules = new(),
+            Modules = [],
             Inventory = new(),
         };
         var json = JsonSerializer.Serialize(User, ConvertHelper.GetSerializerSettings());
-        Assert.IsNotNull(json);
-        Assert.IsNotEmpty(json);
+        Assert.That(json, Is.Not.Null);
+        Assert.That(json, Is.Not.Empty);
         var userCharacter = JsonSerializer.Deserialize<UserCharacter>(json, ConvertHelper.GetSerializerSettings());
-        Assert.IsNotNull(userCharacter);
-        Assert.That(userCharacter!.Name, Is.EqualTo(User.Name));
-        Assert.That(userCharacter!.Modules, Is.EqualTo(User.Modules));
-        Assert.That(userCharacter!.Inventory, Is.EqualTo(User.Inventory));
-        Assert.That(userCharacter, Is.EqualTo(User));
+        Assert.That(userCharacter, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(userCharacter!.Name, Is.EqualTo(User.Name));
+            Assert.That(userCharacter!.Modules, Is.EqualTo(User.Modules));
+            Assert.That(userCharacter!.Inventory, Is.EqualTo(User.Inventory));
+            Assert.That(userCharacter, Is.EqualTo(User));
+        });
         Assert.That(userCharacter, Is.EqualTo(User));
 
         User.Modules.Add(new MinMaxValueModule<int>()
@@ -174,10 +187,10 @@ public class TestProfile
             ModuleType = nameof(MinMaxValueModule<int>)
         });
         json = JsonSerializer.Serialize(User, ConvertHelper.GetSerializerSettings());
-        Assert.IsNotNull(json);
-        Assert.IsNotEmpty(json);
+        Assert.That(json, Is.Not.Null);
+        Assert.That(json, Is.Not.Empty);
         userCharacter = JsonSerializer.Deserialize<UserCharacter>(json, ConvertHelper.GetSerializerSettings());
-        Assert.IsNotNull(userCharacter);
+        Assert.That(userCharacter, Is.Not.Null);
         Assert.That(userCharacter, Is.EqualTo(User));
 
         User.Inventory.Hand = new Gun()
@@ -186,10 +199,10 @@ public class TestProfile
             ItemType = nameof(Gun),
         };
         json = JsonSerializer.Serialize(User, ConvertHelper.GetSerializerSettings());
-        Assert.IsNotNull(json);
-        Assert.IsNotEmpty(json);
+        Assert.That(json, Is.Not.Null);
+        Assert.That(json, Is.Not.Empty);
         userCharacter = JsonSerializer.Deserialize<UserCharacter>(json, ConvertHelper.GetSerializerSettings());
-        Assert.IsNotNull(userCharacter);
+        Assert.That(userCharacter, Is.Not.Null);
         Assert.That(userCharacter, Is.EqualTo(User));
     }
 }
