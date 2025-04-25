@@ -29,7 +29,7 @@ public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqua
     /// </summary>
     public decimal Volume { get; set; }
     /// <summary>
-    /// Path to Instantiate the Item in Godot
+    /// Path to Instantiate the Item.
     /// </summary>
     public string AssetPath { get; set; } = string.Empty;
     /// <summary>

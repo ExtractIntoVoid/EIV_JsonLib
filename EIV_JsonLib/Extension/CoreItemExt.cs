@@ -5,8 +5,20 @@ namespace EIV_JsonLib.Extension;
 
 public static partial class CoreItemExt
 {
+    /// <summary>
+    /// Checks the <paramref name="item"/> if it's <typeparamref name="T"/> type.
+    /// </summary>
+    /// <typeparam name="T">Any <see cref="CoreItem"/>.</typeparam>
+    /// <param name="item">This item</param>
+    /// <returns><see langword="true"/> if <paramref name="item"/> is <typeparamref name="T"/> otherwise <see langword="false"/></returns>
     public static bool Is<T>(this CoreItem item) where T : CoreItem => item is T;
 
+    /// <summary>
+    /// Parsing the <paramref name="item"/> as <typeparamref name="T"/> type.
+    /// </summary>
+    /// <typeparam name="T">Any <see cref="CoreItem"/>.</typeparam>
+    /// <param name="item">This item.</param>
+    /// <returns><paramref name="item"/> as <typeparamref name="T"/> type, or <see langword="default"/>.</returns>
     public static T? As<T>(this CoreItem item) where T : CoreItem => item.Is<T>() ? (T)item : default;
 
     public static bool HasProperty(this CoreItem item, [DisallowNull] string value) => item.GetType().GetProperty(value) != null;

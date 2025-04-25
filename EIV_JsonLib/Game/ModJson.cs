@@ -12,7 +12,7 @@ public class ModJson : IEquatable<ModJson>, IEqualityComparer<ModJson>
     /// </summary>
     public string Name { get; set; } = string.Empty;
     /// <summary>
-    /// Internal name of the Mod (For loading .dll and .pck files)
+    /// Internal name of the Mod (For loading .dll and .eivp files)
     /// </summary>
     public string InternalName { get; set; } = string.Empty;
     /// <summary>
@@ -26,7 +26,7 @@ public class ModJson : IEquatable<ModJson>, IEqualityComparer<ModJson>
     /// <summary>
     /// Other Mod Dependencies (if exists) for the Mod. 
     /// <br>Key must be <see cref="InternalName"/>. Value must be the <see cref="Version"/>.</br>
-    /// <br>Dont use it for C# Dependencies. (Such as ModAPI, EIV_Game, etc.)</br>
+    /// <br>Dont use it for C# Dependencies. (Such as EIV_Game, etc.)</br>
     /// </summary>
     public Dictionary<string, string> Dependencies { get; set; } = [];
 
@@ -63,6 +63,7 @@ public class ModJson : IEquatable<ModJson>, IEqualityComparer<ModJson>
             hash += (int)Dependencies.Select(x => x.Key.GetHashCode() ^ x.Value.GetHashCode()).Average();
         return hash;
     }
+
     public int GetHashCode([DisallowNull] ModJson obj)
     {
         return obj.GetHashCode();

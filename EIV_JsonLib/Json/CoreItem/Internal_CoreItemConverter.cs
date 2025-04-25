@@ -8,19 +8,19 @@ internal class Internal_CoreItemConverter : IJsonLibConverter
     {
         return ItemType switch
         {
-            "Backpack" => typeof(Backpack),
-            "Ammo" => typeof(Ammo),
-            "Magazine" => typeof(Magazine),
-            "GunMod" => typeof(GunMod),
-            "ArmorPlate" => typeof(ArmorPlate),
+            "Helmet" => typeof(Helmet),
             "Rig" => typeof(Rig),
+            "Vest" => typeof(Vest),
+            "Ammo" => typeof(Ammo),
+            "ArmorPlate" => typeof(ArmorPlate),
+            "GunMod" => typeof(GunMod),
+            "Magazine" => typeof(Magazine),
             "Consumable" => typeof(Consumable),
-            "Throwable" => typeof(Throwable),
-            "Melee" => typeof(Melee),
             "Gun" => typeof(Gun),
             "Healing" => typeof(Healing),
-            "Helmet" => typeof(Helmet),
-            "Vest" => typeof(Vest),
+            "Melee" => typeof(Melee),
+            "Throwable" => typeof(Throwable),
+            "Backpack" => typeof(Backpack),
             _ => null,
         };
     }
@@ -30,7 +30,6 @@ internal class Internal_CoreItemConverter : IJsonLibConverter
         return
         [
             new CoreItemConverter()
-            // Add ArmorBase, UsableBase here
         ];
     }
 }

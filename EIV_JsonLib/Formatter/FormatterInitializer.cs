@@ -66,20 +66,17 @@ public static class FormatterInitializer
             IProfileModule_Formatter.AddToTag<MinMaxValueModule<int>>();
             IProfileModule_Formatter.AddToTag<MinMaxValueModule<float>>();
             IProfileModule_Formatter.AddToTag<MinMaxValueModule<decimal>>();
-            IProfileModule_Formatter.AddToTag<MinMaxValueModule<object>>();
             IProfileModule_Formatter.AddToTag<MinMaxValueModule<bool>>();
             IProfileModule_Formatter.AddToTag<ValueModule<int>>();
             IProfileModule_Formatter.AddToTag<ValueModule<float>>();
             IProfileModule_Formatter.AddToTag<ValueModule<decimal>>();
             IProfileModule_Formatter.AddToTag<ValueModule<string>>();
             IProfileModule_Formatter.AddToTag<ValueModule<bool>>();
-            IProfileModule_Formatter.AddToTag<ValueModule<object>>();
             IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<int>>();
             IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<float>>();
             IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<decimal>>();
             IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<string>>();
             IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<bool>>();
-            IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<object>>();
             MemoryPackFormatterProvider.Register(IProfileModule_Formatter);
         }
 
@@ -109,7 +106,7 @@ public static class FormatterInitializer
             MemoryPackFormatterProvider.Register(IWearable_Formatter);
         }
 
-        // IWearable
+        // IStorage
         if (!MemoryPackFormatterProvider.IsRegistered<IStorage>())
         {
             IStorage_Formatter = new();

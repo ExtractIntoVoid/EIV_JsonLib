@@ -21,9 +21,7 @@ public static class ConvertHelper
     {
         JsonSerializerOptions jsonSerializerSettings = new()
         {
-            Converters =
-            {
-            },
+            Converters = { },
             WriteIndented = true,
         };
 

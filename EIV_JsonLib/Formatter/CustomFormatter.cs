@@ -66,10 +66,6 @@ public class CustomFormatter<T> : MemoryPackFormatter<T>
                     type = assignType;
                     goto WRITE;
                 }
-                else
-                {
-                    Console.WriteLine("Check Failed!");
-                }
             }
             MemoryPackSerializationException.ThrowNotFoundInUnionType(value.GetType(), typeof(T));
         }
