@@ -1,11 +1,17 @@
-﻿using System.Text.Json.Serialization;
+﻿using EIV_JsonLib.Profile.ProfileModules;
+
+#if NET8_0_OR_GREATER
+using System.Text.Json.Serialization;
 using System.Text.Json;
-using EIV_JsonLib.Profile.ProfileModules;
+#else
+using Newtonsoft.Json;
+#endif
 
 namespace EIV_JsonLib.Json;
 
 public class ProfileModuleConverter : JsonConverter<IProfileModule>
 {
+#if NET8_0_OR_GREATER
     public override IProfileModule? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var clone = JsonDocument.ParseValue(ref reader).RootElement.Clone();
@@ -45,4 +51,41 @@ public class ProfileModuleConverter : JsonConverter<IProfileModule>
         var list = type.GetGenericArguments().Select(NameWithGenerics).ToList();
         return $"{newName}|{string.Join(",", list)}";
     }
+#else
+    public override IProfileModule? ReadJson(JsonReader reader, Type objectType, IProfileModule? existingValue, bool hasExistingValue, JsonSerializer serializer)
+    {
+        Console.WriteLine(objectType.FullName);
+
+        throw new NotImplementedException();
+    }
+
+    public override void WriteJson(JsonWriter writer, IProfileModule? value, JsonSerializer serializer)
+    {
+        if (value == null)
+            return;
+
+        var type = value.GetType();
+        value.ModuleType = NameWithGenerics(type);
+        serializer.Serialize(writer, value);
+    }
+
+    public string NameWithGenerics(Type type)
+    {
+        if (type == null)
+            return string.Empty;
+
+        if (type.IsArray)
+            return $"{type.GetElementType()?.Name}[]";
+
+        if (!type.IsGenericType)
+            return type.Name;
+
+        var name = type.GetGenericTypeDefinition().Name;
+        var index = name.IndexOf('`');
+        var newName = index == -1 ? name : name.Take(index);
+
+        var list = type.GetGenericArguments().Select(NameWithGenerics).ToList();
+        return $"{newName}|{string.Join(",", list)}";
+    }
+#endif
 }

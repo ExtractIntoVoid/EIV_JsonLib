@@ -1,8 +1,8 @@
-﻿using MemoryPack;
+﻿using EIV_Pack;
 
 namespace EIV_JsonLib;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class BaseNPEffect
 {
     public int Negative { get; set; }

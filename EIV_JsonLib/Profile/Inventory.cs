@@ -1,29 +1,26 @@
 ﻿using EIV_JsonLib.Base;
 using EIV_JsonLib.Interfaces;
-using MemoryPack;
+using EIV_Pack;
 using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_JsonLib.Profile;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class Inventory : IEquatable<Inventory>, IEqualityComparer<Inventory>
 {
     /// <summary>
     /// Hands, the Current Item being held.
     /// </summary>
-    [MemoryPackAllowSerialize]
     public CoreItem? Hand { get; set; }
 
     /// <summary>
     /// Armors
     /// </summary>
-    [MemoryPackAllowSerialize]
     public List<IWearable> Wearables { get; set; } = [];
 
     /// <summary>
     /// <see cref="CoreItem"/>'s that can be equiped fast. [Melee, Guns, etc]
     /// </summary>
-    [MemoryPackAllowSerialize]
     public List<CoreUsable> ToolBelt { get; set; } = [];
 
     public bool Equals(Inventory? other)
@@ -56,7 +53,11 @@ public partial class Inventory : IEquatable<Inventory>, IEqualityComparer<Invent
         return hash;
     }
 
-    public int GetHashCode([DisallowNull] Inventory obj)
+    public int GetHashCode(
+#if NET8_0_OR_GREATER
+        [DisallowNull]
+#endif
+        Inventory obj)
     {
         if (obj == null)
             return 0;

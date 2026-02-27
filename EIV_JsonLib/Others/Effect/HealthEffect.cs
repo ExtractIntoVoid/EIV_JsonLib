@@ -1,8 +1,8 @@
-﻿using MemoryPack;
+﻿using EIV_Pack;
 
 namespace EIV_JsonLib;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class HealthEffect : BaseNPEffect
 {
     public string Cause { get; set; } = string.Empty;

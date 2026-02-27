@@ -1,7 +1,8 @@
-﻿using MemoryPack;
-using EIV_JsonLib.Base;
+﻿using EIV_JsonLib.Base;
 using EIV_JsonLib.Profile.ProfileModules;
 using EIV_JsonLib.Interfaces;
+using EIV_Pack;
+using EIV_Pack.Formatters;
 
 namespace EIV_JsonLib.Formatter;
 
@@ -21,10 +22,28 @@ public static class FormatterInitializer
     /// </summary>
     public static void RegisterFormatter()
     {
+        // Register formatters here before we do something.
+        Backpack.RegisterFormatter();
+        Ammo.RegisterFormatter();
+        Magazine.RegisterFormatter();
+        GunMod.RegisterFormatter();
+        ArmorPlate.RegisterFormatter();
+        Consumable.RegisterFormatter();
+        Throwable.RegisterFormatter();
+        Melee.RegisterFormatter();
+        Gun.RegisterFormatter();
+        Healing.RegisterFormatter();
+        Rig.RegisterFormatter();
+        Helmet.RegisterFormatter();
+        Vest.RegisterFormatter();
+        Ammo.RegisterFormatter();
+        ArmorPlate.RegisterFormatter();
+        Backpack.RegisterFormatter();
+        Stash.RegisterFormatter();
+
         // CoreItem
-        if (!MemoryPackFormatterProvider.IsRegistered<CoreItem>())
+        if (!FormatterProvider.IsRegistered<CoreItem>())
         {
-            CoreItem_Formatter = new();
             CoreItem_Formatter.AddToTag<CoreUsable>();
             CoreItem_Formatter.AddToTag<CoreArmor>();
             CoreItem_Formatter.AddToTag<Backpack>();
@@ -32,35 +51,37 @@ public static class FormatterInitializer
             CoreItem_Formatter.AddToTag<Magazine>();
             CoreItem_Formatter.AddToTag<GunMod>();
             CoreItem_Formatter.AddToTag<ArmorPlate>();
-            MemoryPackFormatterProvider.Register(CoreItem_Formatter);
+            FormatterProvider.Register(CoreItem_Formatter);
+            FormatterProvider.Register(new ListFormatter<CoreItem>());
         }
 
+
         // CoreUsable
-        if (!MemoryPackFormatterProvider.IsRegistered<CoreUsable>())
+        if (!FormatterProvider.IsRegistered<CoreUsable>())
         {
-            CoreUsable_Formatter = new();
             CoreUsable_Formatter.AddToTag<Consumable>();
             CoreUsable_Formatter.AddToTag<Throwable>();
             CoreUsable_Formatter.AddToTag<Melee>();
             CoreUsable_Formatter.AddToTag<Gun>();
             CoreUsable_Formatter.AddToTag<Healing>();
-            MemoryPackFormatterProvider.Register(CoreUsable_Formatter);
+            FormatterProvider.Register(CoreUsable_Formatter);
+            FormatterProvider.Register(new ListFormatter<CoreUsable>());
         }
 
         // CoreArmor
-        if (!MemoryPackFormatterProvider.IsRegistered<CoreArmor>())
+        if (!FormatterProvider.IsRegistered<CoreArmor>())
         {
-            CoreArmor_Formatter = new();
             CoreArmor_Formatter.AddToTag<Rig>();
             CoreArmor_Formatter.AddToTag<Helmet>();
             CoreArmor_Formatter.AddToTag<Vest>();
-            MemoryPackFormatterProvider.Register(CoreArmor_Formatter);
+            FormatterProvider.Register(CoreArmor_Formatter);
+            FormatterProvider.Register(new ListFormatter<CoreArmor>());
         }
 
+
         // IProfileModule
-        if (!MemoryPackFormatterProvider.IsRegistered<IProfileModule>())
+        if (!FormatterProvider.IsRegistered<IProfileModule>())
         {
-            IProfileModule_Formatter = new();
             // Maybe add ALL regular type?
             IProfileModule_Formatter.AddToTag<StatusEffectModule>();
             IProfileModule_Formatter.AddToTag<MinMaxValueModule<int>>();
@@ -77,43 +98,44 @@ public static class FormatterInitializer
             IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<decimal>>();
             IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<string>>();
             IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<bool>>();
-            MemoryPackFormatterProvider.Register(IProfileModule_Formatter);
+            FormatterProvider.Register(IProfileModule_Formatter);
+            FormatterProvider.Register(new ListFormatter<IProfileModule>());
         }
 
         // IDamageDealer
-        if (!MemoryPackFormatterProvider.IsRegistered<IDamageDealer>())
+        if (!FormatterProvider.IsRegistered<IDamageDealer>())
         {
-            IDamageDealer_Formatter = new();
             IDamageDealer_Formatter.AddToTag<Ammo>();
             IDamageDealer_Formatter.AddToTag<Melee>();
-            MemoryPackFormatterProvider.Register(IDamageDealer_Formatter);
+            FormatterProvider.Register(IDamageDealer_Formatter);
+            FormatterProvider.Register(new ListFormatter<IDamageDealer>());
         }
 
         // IDurable
-        if (!MemoryPackFormatterProvider.IsRegistered<IDurable>())
+        if (!FormatterProvider.IsRegistered<IDurable>())
         {
-            IDurable_Formatter = new();
             IDurable_Formatter.AddToTag<ArmorPlate>();
-            MemoryPackFormatterProvider.Register(IDurable_Formatter);
+            FormatterProvider.Register(IDurable_Formatter);
+            FormatterProvider.Register(new ListFormatter<IDurable>());
         }
 
         // IWearable
-        if (!MemoryPackFormatterProvider.IsRegistered<IWearable>())
+        if (!FormatterProvider.IsRegistered<IWearable>())
         {
-            IWearable_Formatter = new();
             IWearable_Formatter.AddToTag<CoreArmor>();
             IWearable_Formatter.AddToTag<Backpack>();
-            MemoryPackFormatterProvider.Register(IWearable_Formatter);
+            FormatterProvider.Register(IWearable_Formatter);
+            FormatterProvider.Register(new ListFormatter<IWearable>());
         }
 
         // IStorage
-        if (!MemoryPackFormatterProvider.IsRegistered<IStorage>())
+        if (!FormatterProvider.IsRegistered<IStorage>())
         {
-            IStorage_Formatter = new();
             IStorage_Formatter.AddToTag<Rig>();
             IStorage_Formatter.AddToTag<Backpack>();
             IStorage_Formatter.AddToTag<Stash>();
-            MemoryPackFormatterProvider.Register(IStorage_Formatter);
+            FormatterProvider.Register(IStorage_Formatter);
+            FormatterProvider.Register(new ListFormatter<IStorage>());
         }
     }
 }

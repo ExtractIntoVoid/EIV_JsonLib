@@ -64,7 +64,11 @@ public class ModJson : IEquatable<ModJson>, IEqualityComparer<ModJson>
         return hash;
     }
 
-    public int GetHashCode([DisallowNull] ModJson obj)
+    public int GetHashCode(
+#if NET8_0_OR_GREATER
+        [DisallowNull]
+#endif
+        ModJson obj)
     {
         return obj.GetHashCode();
     }

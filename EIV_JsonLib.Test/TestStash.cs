@@ -5,13 +5,14 @@ namespace EIV_JsonLib.Test;
 
 public class TestStash
 {
-    [SetUp]
-    public void Setup()
+    FormatterFixture fixture;
+
+    public TestStash(FormatterFixture fixture)
     {
-        FormatterInitializer.RegisterFormatter();
+        this.fixture = fixture;
     }
 
-    [Test]
+    [Fact]
     public void TestStashCreateAndParse()
     {
         Stash stash = new()
@@ -23,30 +24,30 @@ public class TestStash
         };
         Assert.Multiple(() =>
         {
-            Assert.That(stash, Is.Not.Null);
-            Assert.That(stash.Items, Is.Empty);
-            Assert.That(stash.MaxVolume, Is.EqualTo(35));
+            Assert.NotNull(stash);
+            Assert.Empty(stash.Items);
+            Assert.Equal(stash.MaxVolume, 35);
         });
         var ser = stash.Serialize();
-        Assert.That(ser, Is.Not.Null);
-        Assert.That(ser, Is.Not.Empty);
+        Assert.NotNull(ser);
+        Assert.NotEmpty(ser);
         var stash2 = ser.Deserialize<Stash>();
-        Assert.That(stash2, Is.Not.Null);
-        Assert.That(stash2, Is.EqualTo(stash));
+        Assert.NotNull(stash2);
+        Assert.Equal(stash2, stash);
         stash.Items.Add(new Ammo()
         { 
             Id = "sf",
             ItemType = nameof(Ammo),
         });
         ser = stash.Serialize();
-        Assert.That(ser, Is.Not.Null);
-        Assert.That(ser, Is.Not.Empty);
+        Assert.NotNull(ser);
+        Assert.NotEmpty(ser);
         stash2 = ser.Deserialize<Stash>();
-        Assert.That(stash2, Is.Not.Null);
+        Assert.NotNull(stash2);
         Assert.Multiple(() =>
         {
-            Assert.That(stash2, Is.EqualTo(stash));
-            Assert.That(stash.Items, Has.Count.EqualTo(1));
+            Assert.Equal(stash2, stash);
+            Assert.Equal(stash.Items.Count, 1);
         });
     }
 }

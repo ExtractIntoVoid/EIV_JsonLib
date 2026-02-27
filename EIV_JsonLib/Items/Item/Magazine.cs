@@ -1,15 +1,14 @@
 ﻿using EIV_JsonLib.Base;
-using MemoryPack;
+using EIV_Pack;
 
 namespace EIV_JsonLib;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class Magazine : CoreItem
 {
     /// <summary>
     /// List of <see cref="Ammo"/> inside of the <see cref="Magazine"/>
     /// </summary>
-    [MemoryPackAllowSerialize]
     public List<Ammo> Ammunitions { get ; set ; } = [];
 
     /// <summary>

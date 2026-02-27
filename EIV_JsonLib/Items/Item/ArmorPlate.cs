@@ -1,10 +1,10 @@
 ﻿using EIV_JsonLib.Base;
 using EIV_JsonLib.Interfaces;
-using MemoryPack;
+using EIV_Pack;
 
 namespace EIV_JsonLib;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class ArmorPlate : CoreItem, IDurable
 {
     public string Material { get; set; } = string.Empty;

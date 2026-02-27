@@ -1,12 +1,11 @@
-﻿using MemoryPack;
+﻿using EIV_Pack;
 using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_JsonLib.Base;
 
 /// <summary>
-/// Represent an Abstract Core Item.
+/// Represent an Core Item.
 /// </summary>
-[MemoryPackable(GenerateType.NoGenerate)]
 public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqualityComparer<CoreItem>
 {
     /// <summary>
@@ -38,16 +37,19 @@ public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqua
     /// </summary>
     public List<string> Tags { get; set; } = [];
 
+    /// <inheritdoc/>
     public object Clone()
     {
         return this.MemberwiseClone();
     }
 
+    /// <inheritdoc/>
     public override string ToString()
     {
         return $"{Id} {ItemType} {Weight} {Volume} {AssetPath} Tags: {string.Join(", ", Tags)}";
     }
 
+    /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
         if (obj == null)
@@ -55,6 +57,7 @@ public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqua
         return obj.GetHashCode() == this.GetHashCode();
     }
 
+    /// <inheritdoc/>
     public override int GetHashCode()
     {
         int hash = 0;
@@ -71,6 +74,7 @@ public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqua
         return hash;
     }
 
+    /// <inheritdoc/>
     public bool Equals(CoreItem? other)
     {
         if (other == null)
@@ -78,6 +82,7 @@ public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqua
         return this.GetHashCode() == other.GetHashCode();
     }
 
+    /// <inheritdoc/>
     public bool Equals(CoreItem? x, CoreItem? y)
     {
         if (x == null && y == null)
@@ -89,7 +94,12 @@ public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqua
         return x.GetHashCode() == y.GetHashCode();
     }
 
-    public int GetHashCode([DisallowNull] CoreItem obj)
+    /// <inheritdoc/>
+    public int GetHashCode(
+#if NET8_0_OR_GREATER
+        [DisallowNull]
+#endif
+        CoreItem obj)
     {
         if (obj == null)
             return 0;

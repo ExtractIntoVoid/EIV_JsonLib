@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net8.0;net10.0;netstandard2.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>EIV_JsonLib</RootNamespace>
@@ -12,7 +12,8 @@
     <PackageProjectUrl>https://github.com/ExtractIntoVoid/EIV_JsonLib</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>2.0.5.4</Version>
+    <Version>2.1</Version>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,12 +28,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MemoryPack" Version="1.21.4" />
-    <PackageReference Include="MemoryPack.Core" Version="1.21.4" />
-    <PackageReference Include="MemoryPack.Generator" Version="1.21.4">
+	<PackageReference Include="EIV_Pack" Version="2.2.1.1" />
+    <PackageReference Include="EIV_Pack.Generator" Version="2.2.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		<OutputItemType>Analyzer</OutputItemType>
+		<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" Condition=" $(TargetFramework) == 'netstandard2.0' " />
   </ItemGroup>
 
 </Project>

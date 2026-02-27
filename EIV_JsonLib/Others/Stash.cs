@@ -1,17 +1,16 @@
 ﻿using EIV_JsonLib.Base;
 using EIV_JsonLib.Interfaces;
-using MemoryPack;
+using EIV_Pack;
 using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_JsonLib;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class Stash : IEquatable<Stash>, IEqualityComparer<Stash>, IStorage
 {
     public uint MaxSize { get; set; }
     public decimal MaxWeight { get; set; }
     public decimal MaxVolume { get; set; }
-    [MemoryPackAllowSerialize]
     public List<CoreItem> Items { get; set; } = [];
 
     public bool Equals(Stash? other)
@@ -40,7 +39,11 @@ public partial class Stash : IEquatable<Stash>, IEqualityComparer<Stash>, IStora
         return hash;
     }
 
-    public int GetHashCode([DisallowNull] Stash obj)
+    public int GetHashCode(
+#if NET8_0_OR_GREATER
+        [DisallowNull]
+#endif
+        Stash obj)
     {
         return obj.GetHashCode();
     }

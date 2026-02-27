@@ -1,8 +1,8 @@
-﻿using MemoryPack;
+﻿using EIV_Pack;
 
 namespace EIV_JsonLib.Profile.ProfileModules;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class MinMaxValueModule<T> : ValueModule<T>, IProfileModule
 {
     public required T MinValue { get; init; }

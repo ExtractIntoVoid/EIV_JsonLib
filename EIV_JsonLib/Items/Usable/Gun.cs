@@ -1,18 +1,14 @@
 ﻿using EIV_JsonLib.Base;
-using MemoryPack;
+using EIV_Pack;
 
 namespace EIV_JsonLib;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class Gun : CoreUsable
 {
     public List<string> MagazineSupport { get ; set ; } = [];
     public List<string> AmmoSupported { get ; set ; } = [];
-
-    [MemoryPackAllowSerialize]
     public Magazine? Magazine { get ; set ; }
-
-    [MemoryPackAllowSerialize]
     public List<GunMod> GunMods { get; set; } = [];
 
     public override int GetHashCode()

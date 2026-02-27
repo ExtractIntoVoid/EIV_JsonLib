@@ -1,8 +1,5 @@
-﻿using MemoryPack;
+﻿namespace EIV_JsonLib.Interfaces;
 
-namespace EIV_JsonLib.Interfaces;
-
-[MemoryPackable(GenerateType.NoGenerate)]
 public partial interface IDamageDealer
 {
     /// <summary>

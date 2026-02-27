@@ -1,8 +1,8 @@
-﻿using MemoryPack;
+﻿using EIV_Pack;
 
 namespace EIV_JsonLib.Profile.ProfileModules;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class ReadOnlyValueModule<T> : IProfileModule
 {
     public required string Name { get; init; }

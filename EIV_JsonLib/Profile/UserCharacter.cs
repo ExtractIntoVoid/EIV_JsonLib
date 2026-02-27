@@ -1,20 +1,16 @@
 ﻿using EIV_JsonLib.Profile.ProfileModules;
-using MemoryPack;
+using EIV_Pack;
 using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_JsonLib.Profile;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class UserCharacter : IEquatable<UserCharacter>, IEqualityComparer<UserCharacter>
 {
     public string Name { get; set; } = string.Empty;
     public string Origin { get; set; } = string.Empty;
     public DateTimeOffset CreationDate { get; set; } = DateTimeOffset.MinValue;
-
-    [MemoryPackAllowSerialize]
     public Inventory Inventory { get; set; } = new();
-
-    [MemoryPackAllowSerialize]
     public List<IProfileModule> Modules { get; set; } = [];
 
     public bool Equals(UserCharacter? other)
@@ -50,7 +46,11 @@ public partial class UserCharacter : IEquatable<UserCharacter>, IEqualityCompare
         return hash;
     }
 
-    public int GetHashCode([DisallowNull] UserCharacter obj)
+    public int GetHashCode(
+#if NET8_0_OR_GREATER
+        [DisallowNull]
+#endif
+        UserCharacter obj)
     {
         return obj.GetHashCode();
     }

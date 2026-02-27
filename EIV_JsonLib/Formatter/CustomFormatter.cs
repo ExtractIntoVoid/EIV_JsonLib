@@ -1,56 +1,59 @@
-﻿using MemoryPack.Internal;
-using MemoryPack;
+﻿using EIV_JsonLib.Base;
+using EIV_Pack;
+using EIV_Pack.Formatters;
 
 namespace EIV_JsonLib.Formatter;
 
-[Preserve]
-public class CustomFormatter<T> : MemoryPackFormatter<T>
+public class CustomFormatter<T> : BaseFormatter<T>
 {
-    public Dictionary<Type, ushort> TypeToTag = [];
-    public ushort LastTag => (ushort)(TypeToTag.Count == 0 ? 0 : TypeToTag.Last().Value);
-    public ushort LastAvailable => (ushort)(TypeToTag.Count == 0 ? 0 : TypeToTag.Last().Value + 1);
+    public Dictionary<Type, int> TypeToTag = [];
+    public int LastTag => TypeToTag.Count == 0 ? 0 : TypeToTag.Last().Value;
+    public int LastAvailable => TypeToTag.Count == 0 ? 0 : TypeToTag.Last().Value + 1;
 
-    public void AddToTag<Type>()
+    public void AddToTag<TTypeToAdd>()
     {
-        TypeToTag.Add(typeof(Type), LastAvailable);
-    }
+        Type type = typeof(TTypeToAdd);
+        if (TypeToTag.ContainsKey(type))
+            return;
 
-    public void AddToTag(Type type)
-    {
         TypeToTag.Add(type, LastAvailable);
+        FormatterProvider.RegisterCollection<TTypeToAdd>();
     }
 
-    public override void Deserialize(ref MemoryPackReader reader, scoped ref T? value)
+    public override void Deserialize(ref PackReader reader, scoped ref T? value)
     {
-        if (!reader.TryReadUnionHeader(out ushort tag))
+        if (!reader.TryReadHeader(out int tag) || tag == EIV_Pack.Constants.NullHeader)
+        {
             value = default;
+            return;
+        }
+
+        var type = TypeToTag.FirstOrDefault(x => x.Value == tag);
+        if (type.Value != tag)
+        {
+            throw new PackException($"Tag not found in the Tag Cache! {tag} {typeof(T)}");
+        } 
         else
         {
-            var type = TypeToTag.FirstOrDefault(x => x.Value == tag);
-            if (type.Value != tag)
-                MemoryPackSerializationException.ThrowInvalidTag(tag, typeof(T));
-            else
-            {
-                var oValue = (object?)value;
-                reader.GetFormatter(type.Key).Deserialize(ref reader, ref oValue);
-                value = (T?)oValue;
-            }
+            var oValue = (object?)value;
+            FormatterProvider.GetFormatter(type.Key).Deserialize(ref reader, ref oValue);
+            value = (T?)oValue;
         }
     }
 
-    public override void Serialize<TBufferWriter>(ref MemoryPackWriter<TBufferWriter> writer, scoped ref T? value)
+    public override void Serialize(ref PackWriter writer, scoped ref readonly T? value)
     {
         if (value == null)
         {
-            writer.WriteNullUnionHeader();
+            writer.WriteHeader();
             return;
         }
 
         Type type = value.GetType();
-        if (!TypeToTag.TryGetValue(type, out ushort tag))
+        if (!TypeToTag.TryGetValue(type, out int tag))
         {
-            var AssignableFrom = TypeToTag.Keys.Where(x => x.IsAssignableFrom(type)).ToList();
-            foreach (var assignType in AssignableFrom)
+            var assignable = TypeToTag.Keys.Where(x => x.IsAssignableFrom(type) || type.IsAssignableFrom(x)).ToList();
+            foreach (var assignType in assignable)
             {
                 if (TypeToTag.TryGetValue(assignType, out tag))
                 {
@@ -58,20 +61,11 @@ public class CustomFormatter<T> : MemoryPackFormatter<T>
                     goto WRITE;
                 }
             }
-            var AssignableTo = TypeToTag.Keys.Where(x => x.IsAssignableTo(type)).ToList();
-            foreach (var assignType in AssignableTo)
-            {
-                if (TypeToTag.TryGetValue(assignType, out tag))
-                {
-                    type = assignType;
-                    goto WRITE;
-                }
-            }
-            MemoryPackSerializationException.ThrowNotFoundInUnionType(value.GetType(), typeof(T));
+            throw new PackException($"Tag not found in the Tag Cache! {tag} {typeof(T)} {value.GetType()}");
         }
     WRITE:
-        writer.WriteUnionHeader(tag);
-        var formatter = writer.GetFormatter(type);
+        writer.WriteHeader(tag);
+        var formatter = FormatterProvider.GetFormatter(type);
         var oValue = (object?)value;
         formatter.Serialize(ref writer, ref oValue);
     }

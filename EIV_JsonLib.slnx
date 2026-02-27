@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="EIV_JsonLib.Test/EIV_JsonLib.Test.csproj" />
+  <Project Path="EIV_JsonLib/EIV_JsonLib.csproj" />
+</Solution>

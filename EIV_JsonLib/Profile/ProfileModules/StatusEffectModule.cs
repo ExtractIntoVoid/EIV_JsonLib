@@ -1,9 +1,9 @@
-﻿using MemoryPack;
+﻿using EIV_Pack;
 using System.Reflection;
 
 namespace EIV_JsonLib.Profile.ProfileModules;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class StatusEffectModule : IProfileModule
 {
     public required string Name { get; init; }

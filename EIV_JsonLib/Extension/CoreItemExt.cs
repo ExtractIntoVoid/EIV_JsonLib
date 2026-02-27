@@ -19,20 +19,45 @@ public static partial class CoreItemExt
     /// <typeparam name="T">Any <see cref="CoreItem"/>.</typeparam>
     /// <param name="item">This item.</param>
     /// <returns><paramref name="item"/> as <typeparamref name="T"/> type, or <see langword="default"/>.</returns>
-    public static T? As<T>(this CoreItem item) where T : CoreItem => item.Is<T>() ? (T)item : default;
+    public static T? As<T>(this CoreItem item) where T : CoreItem => item is T ? (T)item : default;
 
-    public static bool HasProperty(this CoreItem item, [DisallowNull] string value) => item.GetType().GetProperty(value) != null;
+    /// <summary>
+    /// Checks if the <paramref name="item"/> has a property named <paramref name="propertyName"/>.
+    /// </summary>
+    /// <param name="item">The <see cref="CoreItem"/> to check.</param>
+    /// <param name="propertyName">The property name to check.</param>
+    /// <returns><see langword="true"/> if <paramref name="propertyName"/> exists, otherwise <see langword="false"/>.</returns>
+    public static bool HasProperty(this CoreItem item,
+#if NET8_0_OR_GREATER
+        [DisallowNull]
+#endif
+        string propertyName) => item.GetType().GetProperty(propertyName) != null;
 
-    public static T? GetProperty<T>(this CoreItem item, [DisallowNull] string value)
+    /// <summary>
+    /// Gets a property value of type <typeparamref name="T"/> from <paramref name="item"/> that has a name of <paramref name="propertyName"/>.
+    /// </summary>
+    /// <typeparam name="T">Any type.</typeparam>
+    /// <param name="item">The <see cref="CoreItem"/> to get the property from.</param>
+    /// <param name="propertyName">The property name.</param>
+    /// <returns>The value of <paramref name="propertyName"/> if found and exists, otherwise <see langword="default"/>.</returns>
+    public static T? GetPropertyValue<T>(this CoreItem item,
+#if NET8_0_OR_GREATER
+        [DisallowNull]
+#endif
+        string propertyName)
     {
-        if (!item.HasProperty(value))
+        if (!item.HasProperty(propertyName))
             return default;
-        if (item.GetType().GetProperty(value)!.PropertyType != typeof(T))
+        if (item.GetType().GetProperty(propertyName)!.PropertyType != typeof(T))
             return default;
-        return (T?)item.GetType().GetProperty(value)!.GetValue(item);
+        return (T?)item.GetType().GetProperty(propertyName)!.GetValue(item);
     }
 
-    public static bool ChangeProperty(this CoreItem item, [DisallowNull] string valueName, KVChange kv)
+    public static bool ChangeProperty(this CoreItem item,
+#if NET8_0_OR_GREATER
+        [DisallowNull]
+#endif
+        string valueName, KVChange kv)
     {
         if (!item.HasProperty(valueName))
             return false;

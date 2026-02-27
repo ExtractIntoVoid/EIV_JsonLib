@@ -1,12 +1,10 @@
-﻿using MemoryPack;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_JsonLib.Base;
 
 /// <summary>
 /// Represent an Abstract Core Useble Item.
 /// </summary>
-[MemoryPackable(GenerateType.NoGenerate)]
 public abstract partial class CoreUsable : CoreItem, IEquatable<CoreUsable>, IEqualityComparer<CoreUsable>
 {
     /// <summary>
@@ -18,6 +16,7 @@ public abstract partial class CoreUsable : CoreItem, IEquatable<CoreUsable>, IEq
     /// </summary>
     public decimal UseTime { get; set; }
 
+    /// <inheritdoc/>
     public bool Equals(CoreUsable? other)
     {
         if (other == null)
@@ -25,6 +24,7 @@ public abstract partial class CoreUsable : CoreItem, IEquatable<CoreUsable>, IEq
         return this.GetHashCode() == other.GetHashCode();
     }
 
+    /// <inheritdoc/>
     public bool Equals(CoreUsable? x, CoreUsable? y)
     {
         if (x == null && y == null)
@@ -36,16 +36,23 @@ public abstract partial class CoreUsable : CoreItem, IEquatable<CoreUsable>, IEq
         return x.GetHashCode() == y.GetHashCode();
     }
 
+    /// <inheritdoc/>
     public override int GetHashCode()
     {
         return base.GetHashCode() + CanUse.GetHashCode() + UseTime.GetHashCode();
     }
 
-    public int GetHashCode([DisallowNull] CoreUsable obj)
+    /// <inheritdoc/>
+    public int GetHashCode(
+#if NET8_0_OR_GREATER
+        [DisallowNull]
+#endif
+        CoreUsable obj)
     {
         return obj.GetHashCode();
     }
 
+    /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
         return Equals(obj as CoreUsable);

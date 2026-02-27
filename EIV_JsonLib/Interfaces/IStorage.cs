@@ -1,12 +1,11 @@
 ﻿using EIV_JsonLib.Base;
-using MemoryPack;
+using EIV_Pack.Formatters;
 
 namespace EIV_JsonLib.Interfaces;
 
 /// <summary>
 /// Storage Interface, makes inventory slots available for this item.
 /// </summary>
-[MemoryPackable(GenerateType.NoGenerate)]
 public partial interface IStorage
 {
     /// <summary>
@@ -24,6 +23,5 @@ public partial interface IStorage
     /// <summary>
     /// Stores a <see cref="List{}"/> of <see cref="CoreItem"/>s.
     /// </summary>
-    [MemoryPackAllowSerialize]
     public List<CoreItem> Items { get; set; }
 }

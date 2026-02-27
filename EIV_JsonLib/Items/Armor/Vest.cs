@@ -1,7 +1,7 @@
 ﻿using EIV_JsonLib.Base;
-using MemoryPack;
+using EIV_Pack;
 
 namespace EIV_JsonLib;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class Vest : CoreArmor;

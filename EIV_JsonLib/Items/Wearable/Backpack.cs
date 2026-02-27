@@ -1,17 +1,15 @@
 ﻿using EIV_JsonLib.Base;
 using EIV_JsonLib.Interfaces;
-using MemoryPack;
+using EIV_Pack;
 
 namespace EIV_JsonLib;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class Backpack : CoreItem, IWearable, IStorage
 {
     public uint MaxSize { get; set; }
     public decimal MaxWeight { get; set; }
     public decimal MaxVolume { get; set; }
-
-    [MemoryPackAllowSerialize]
     public List<CoreItem> Items { get; set; } = [];
     public string Slot { get; set; } = string.Empty;
 

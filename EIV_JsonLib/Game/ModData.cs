@@ -56,7 +56,11 @@ public class ModData : IEquatable<ModData>, IEqualityComparer<ModData>
         return hash;
     }
 
-    public int GetHashCode([DisallowNull] ModData obj)
+    public int GetHashCode(
+#if NET8_0_OR_GREATER
+        [DisallowNull]
+#endif
+        ModData obj)
     {
         return obj.GetHashCode();
     }

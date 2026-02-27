@@ -1,16 +1,14 @@
 ﻿using EIV_JsonLib.Base;
-using MemoryPack;
+using EIV_Pack;
 
 namespace EIV_JsonLib;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class Consumable : CoreUsable
 {
     public uint MaxUses { get; set; }
     public int EnergyRestore { get; set; }
     public int HydrationRestore { get; set; }
-
-    [MemoryPackAllowSerialize]
     public List<SideEffect> SideEffects { get; set; } = [];
 
     public override int GetHashCode()

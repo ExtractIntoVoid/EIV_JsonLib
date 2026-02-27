@@ -1,11 +1,11 @@
-﻿using MemoryPack;
+﻿using EIV_Pack;
 
 namespace EIV_JsonLib.Profile.ProfileModules;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class ValueModule<T> : IProfileModule
 {
-    public required string Name { get; init; }
+    public required string Name { get; init;  }
     public required string ModuleType { get; set; }
     public required T Value { get; set; }
 

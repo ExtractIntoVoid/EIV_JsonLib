@@ -1,9 +1,8 @@
-﻿using MemoryPack;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_JsonLib.Profile.ProfileModules;
 
-[MemoryPackable(GenerateType.NoGenerate)]
-public partial interface IProfileModule
+public interface IProfileModule
 {
     public string Name { get; init; }
     public string ModuleType { get; set; }

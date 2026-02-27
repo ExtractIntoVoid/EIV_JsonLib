@@ -1,11 +1,16 @@
 ﻿using EIV_JsonLib.Base;
+#if NET8_0_OR_GREATER
 using System.Text.Json;
 using System.Text.Json.Serialization;
+#else
+using Newtonsoft.Json;
+#endif
 
 namespace EIV_JsonLib.Json;
 
 public class CoreItemConverter : JsonConverter<CoreItem>
 {
+#if NET8_0_OR_GREATER
     public override CoreItem? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var clone = JsonDocument.ParseValue(ref reader).RootElement.Clone();
@@ -22,4 +27,15 @@ public class CoreItemConverter : JsonConverter<CoreItem>
     {
         JsonSerializer.Serialize(writer, value, value.GetType(), options);
     }
+#else
+    public override CoreItem? ReadJson(JsonReader reader, Type objectType, CoreItem? existingValue, bool hasExistingValue, JsonSerializer serializer)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void WriteJson(JsonWriter writer, CoreItem? value, JsonSerializer serializer)
+    {
+        throw new NotImplementedException();
+    }
+#endif
 }

@@ -1,21 +1,22 @@
 ﻿using EIV_JsonLib.Interfaces;
-using MemoryPack;
 using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_JsonLib.Base;
 
 /// <summary>
-/// Represent an Abstract Core Armor.
+/// Represent a Core Armor.
 /// </summary>
-[MemoryPackable(GenerateType.NoGenerate)]
 public abstract partial class CoreArmor : CoreItem, IWearable, IEquatable<CoreArmor>, IEqualityComparer<CoreArmor>
 {
     /// <summary>
     /// How much Precent it can block a Damagable Item.
     /// </summary>
     public decimal BlockEfficacy { get; set; }
+
+    /// <inheritdoc/>
     public string Slot { get; set; } = string.Empty;
 
+    /// <inheritdoc/>
     public override int GetHashCode()
     {
         int hash = base.GetHashCode();
@@ -25,6 +26,7 @@ public abstract partial class CoreArmor : CoreItem, IWearable, IEquatable<CoreAr
         return hash;
     }
 
+    /// <inheritdoc/>
     public bool Equals(CoreArmor? other)
     {
         if (other == null)
@@ -32,6 +34,7 @@ public abstract partial class CoreArmor : CoreItem, IWearable, IEquatable<CoreAr
         return this.GetHashCode() == other.GetHashCode();
     }
 
+    /// <inheritdoc/>
     public bool Equals(CoreArmor? x, CoreArmor? y)
     {
         if (x == null && y == null)
@@ -43,11 +46,17 @@ public abstract partial class CoreArmor : CoreItem, IWearable, IEquatable<CoreAr
         return x.GetHashCode() == y.GetHashCode();
     }
 
-    public int GetHashCode([DisallowNull] CoreArmor obj)
+    /// <inheritdoc/>
+    public int GetHashCode(
+#if NET8_0_OR_GREATER
+        [DisallowNull]
+#endif
+        CoreArmor obj)
     {
         return obj.GetHashCode();
     }
 
+    /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
         return Equals(obj as CoreArmor);

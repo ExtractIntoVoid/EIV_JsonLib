@@ -1,4 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿#if NET8_0_OR_GREATER
+using System.Text.Json;
+using System.Text.Json.Serialization;
+#else
+using Newtonsoft.Json;
+#endif
 
 namespace EIV_JsonLib;
 

@@ -1,18 +1,16 @@
 ﻿using EIV_JsonLib.Base;
 using EIV_JsonLib.Interfaces;
-using MemoryPack;
+using EIV_Pack;
 
 namespace EIV_JsonLib;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class Rig : CoreArmor, IStorage
 {
     public uint MaxSize { get; set; }
     public decimal MaxWeight { get; set; }
     public decimal MaxVolume { get; set; }
-    [MemoryPackAllowSerialize]
     public List<CoreItem> Items { get; set; } = [];
-    [MemoryPackAllowSerialize]
     public ArmorPlate? PlateSlot { get; set; }
     public List<string> ItemTypesAccepted { get; set; } = [];
     public List<string> SpecificItemsAccepted { get; set; } = [];

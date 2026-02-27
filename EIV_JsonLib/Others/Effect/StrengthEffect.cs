@@ -1,8 +1,8 @@
-﻿using MemoryPack;
+﻿using EIV_Pack;
 
 namespace EIV_JsonLib;
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class StrengthEffect
 {
     public int Min { get; set; }

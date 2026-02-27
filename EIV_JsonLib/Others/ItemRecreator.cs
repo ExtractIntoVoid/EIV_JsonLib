@@ -1,14 +1,13 @@
-﻿using MemoryPack;
+﻿using EIV_Pack;
 
 namespace EIV_JsonLib;
 
 /// <summary>
 /// Internally cannot be deserialized since this is Just a json
 /// </summary>
-[MemoryPackable(GenerateType.CircularReference)]
+[EIV_Packable]
 public partial class ItemRecreator
 {
-    [MemoryPackConstructor]
     public ItemRecreator()
     { 
 
@@ -32,21 +31,14 @@ public partial class ItemRecreator
         Contained = itemRecreators;
     }
 
-    [MemoryPackOrder(0)]
     public string ItemBaseID { get; set; } = string.Empty;
 
-    [MemoryPackOrder(1)]
     public uint Amount { get; set; } = 1;
-
-    [MemoryPackOrder(2)]
-    [MemoryPackAllowSerialize]
     public List<ItemRecreator> Contained { get; set; } = [];
 
-    [MemoryPackOrder(3)]
     public AcceptedSlots Slot { get; set; } = AcceptedSlots.None; //AcceptedSlots
 
     //  We set 0 always so that means not damaged any precent, only applied if it's using IDurable
-    [MemoryPackOrder(4)]
     public Dictionary<string, KVChange> ChangedValues { get; set; } = [];
     public override string ToString()
     {
@@ -68,7 +60,7 @@ public partial class ItemRecreator
     }
 }
 
-[MemoryPackable]
+[EIV_Packable]
 public partial class KVChange
 {
     public TypeName AvailableTypeName;
@@ -90,7 +82,7 @@ public partial class KVChange
         if (ListStringValue != null && ListStringValue.Count != 0)
             hash += (int)ListStringValue.Select(x => x.GetHashCode()).Average();
         if (!string.IsNullOrEmpty(StringValue))
-            hash += StringValue.GetHashCode();
+            hash += StringValue!.GetHashCode();
         if (UIntValue != null)
             hash += UIntValue.GetHashCode();
         if (IntValue != null)
