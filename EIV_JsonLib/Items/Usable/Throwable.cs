@@ -6,7 +6,7 @@ namespace EIV_JsonLib;
 [EIV_Packable]
 public partial class Throwable : CoreUsable
 {
-    public decimal FuseTime { get; set; }
+    public double FuseTime { get; set; }
 
     public override int GetHashCode()
     {

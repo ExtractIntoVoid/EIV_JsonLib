@@ -8,8 +8,8 @@ namespace EIV_JsonLib;
 public partial class Rig : CoreArmor, IStorage
 {
     public uint MaxSize { get; set; }
-    public decimal MaxWeight { get; set; }
-    public decimal MaxVolume { get; set; }
+    public double MaxWeight { get; set; }
+    public double MaxVolume { get; set; }
     public List<CoreItem> Items { get; set; } = [];
     public ArmorPlate? PlateSlot { get; set; }
     public List<string> ItemTypesAccepted { get; set; } = [];

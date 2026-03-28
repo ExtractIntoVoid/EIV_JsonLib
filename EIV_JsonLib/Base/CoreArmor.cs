@@ -11,7 +11,7 @@ public abstract partial class CoreArmor : CoreItem, IWearable, IEquatable<CoreAr
     /// <summary>
     /// How much Precent it can block a Damagable Item.
     /// </summary>
-    public decimal BlockEfficacy { get; set; }
+    public double BlockEfficacy { get; set; }
 
     /// <inheritdoc/>
     public string Slot { get; set; } = string.Empty;

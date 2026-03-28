@@ -81,11 +81,6 @@ public static partial class CoreItemExt
                     return false;
                 prop.SetValue(item, kv.UIntValue);
                 break;
-            case TypeName.Decimal:
-                if (prop.PropertyType != typeof(decimal))
-                    return false;
-                prop.SetValue(item, kv.DecimalValue);
-                break;
             case TypeName.List_String:
                 if (prop.PropertyType != typeof(List<string>))
                     return false;

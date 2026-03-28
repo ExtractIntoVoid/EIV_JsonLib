@@ -9,8 +9,8 @@ namespace EIV_JsonLib;
 public partial class Stash : IEquatable<Stash>, IEqualityComparer<Stash>, IStorage
 {
     public uint MaxSize { get; set; }
-    public decimal MaxWeight { get; set; }
-    public decimal MaxVolume { get; set; }
+    public double MaxWeight { get; set; }
+    public double MaxVolume { get; set; }
     public List<CoreItem> Items { get; set; } = [];
 
     public bool Equals(Stash? other)

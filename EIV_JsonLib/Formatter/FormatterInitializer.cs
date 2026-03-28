@@ -36,9 +36,6 @@ public static class FormatterInitializer
         Rig.RegisterFormatter();
         Helmet.RegisterFormatter();
         Vest.RegisterFormatter();
-        Ammo.RegisterFormatter();
-        ArmorPlate.RegisterFormatter();
-        Backpack.RegisterFormatter();
         Stash.RegisterFormatter();
 
         // CoreItem
@@ -86,16 +83,16 @@ public static class FormatterInitializer
             IProfileModule_Formatter.AddToTag<StatusEffectModule>();
             IProfileModule_Formatter.AddToTag<MinMaxValueModule<int>>();
             IProfileModule_Formatter.AddToTag<MinMaxValueModule<float>>();
-            IProfileModule_Formatter.AddToTag<MinMaxValueModule<decimal>>();
+            IProfileModule_Formatter.AddToTag<MinMaxValueModule<double>>();
             IProfileModule_Formatter.AddToTag<MinMaxValueModule<bool>>();
             IProfileModule_Formatter.AddToTag<ValueModule<int>>();
             IProfileModule_Formatter.AddToTag<ValueModule<float>>();
-            IProfileModule_Formatter.AddToTag<ValueModule<decimal>>();
+            IProfileModule_Formatter.AddToTag<ValueModule<double>>();
             IProfileModule_Formatter.AddToTag<ValueModule<string>>();
             IProfileModule_Formatter.AddToTag<ValueModule<bool>>();
             IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<int>>();
             IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<float>>();
-            IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<decimal>>();
+            IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<double>>();
             IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<string>>();
             IProfileModule_Formatter.AddToTag<ReadOnlyValueModule<bool>>();
             FormatterProvider.Register(IProfileModule_Formatter);

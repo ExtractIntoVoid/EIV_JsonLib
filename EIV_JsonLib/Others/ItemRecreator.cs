@@ -67,13 +67,12 @@ public partial class KVChange
     public string? StringValue;
     public uint? UIntValue;
     public int? IntValue;
-    public decimal? DecimalValue;
     public List<string>? ListStringValue;
     public double? DoubleValue;
 
     public override string ToString()
     {
-        return $"AvailableTypeName: {AvailableTypeName} String? {StringValue}, Uint? {UIntValue}, Int? {IntValue}, Dec? {DecimalValue}, ListString? {ListStringValue}";
+        return $"AvailableTypeName: {AvailableTypeName} String? {StringValue}, Uint? {UIntValue}, Int? {IntValue}, ListString? {ListStringValue}";
     }
 
     public override int GetHashCode()
@@ -87,8 +86,6 @@ public partial class KVChange
             hash += UIntValue.GetHashCode();
         if (IntValue != null)
             hash += IntValue.GetHashCode();
-        if (DecimalValue != null)
-            hash += DecimalValue.GetHashCode();
         if (DoubleValue != null)
             hash += DoubleValue.GetHashCode();
         return hash;
@@ -109,7 +106,6 @@ public enum TypeName : byte
     String,
     Int,
     UInt,
-    Decimal,
     List_String,
     Double,
 }

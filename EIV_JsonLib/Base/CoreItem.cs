@@ -21,12 +21,12 @@ public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqua
     /// Weight of the Item. How heavy is it.
     /// <br>Unit is KG [Kilogramm]</br>
     /// </summary>
-    public decimal Weight { get; set; }
+    public double Weight { get; set; }
     /// <summary>
     /// Volume of the Item. How much space does it need.
     /// <br>Unit is L [Liter]</br>
     /// </summary>
-    public decimal Volume { get; set; }
+    public double Volume { get; set; }
     /// <summary>
     /// Path to Instantiate the Item.
     /// </summary>

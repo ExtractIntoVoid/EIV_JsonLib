@@ -14,7 +14,7 @@ public abstract partial class CoreUsable : CoreItem, IEquatable<CoreUsable>, IEq
     /// <summary>
     /// How long does it need to actually use this Item
     /// </summary>
-    public decimal UseTime { get; set; }
+    public double UseTime { get; set; }
 
     /// <inheritdoc/>
     public bool Equals(CoreUsable? other)

@@ -15,11 +15,11 @@ public partial interface IStorage
     /// <summary>
     /// Max Weight (In KG) for the <see cref="Items"/>
     /// </summary>
-    public decimal MaxWeight { get; set; }
+    public double MaxWeight { get; set; }
     /// <summary>
     /// Max Volume (In L) for the <see cref="Items"/>
     /// </summary>
-    public decimal MaxVolume { get; set; }
+    public double MaxVolume { get; set; }
     /// <summary>
     /// Stores a <see cref="List{}"/> of <see cref="CoreItem"/>s.
     /// </summary>
