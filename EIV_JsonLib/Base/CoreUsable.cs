@@ -3,7 +3,7 @@
 namespace EIV_JsonLib.Base;
 
 /// <summary>
-/// Represent an Abstract Core Useble Item.
+/// Represent an Usable Item.
 /// </summary>
 public abstract partial class CoreUsable : CoreItem, IEquatable<CoreUsable>, IEqualityComparer<CoreUsable>
 {
@@ -11,6 +11,7 @@ public abstract partial class CoreUsable : CoreItem, IEquatable<CoreUsable>, IEq
     /// Can we use the Item or not.
     /// </summary>
     public bool CanUse { get; set; }
+
     /// <summary>
     /// How long does it need to actually use this Item
     /// </summary>

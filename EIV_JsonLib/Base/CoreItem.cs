@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace EIV_JsonLib.Base;
 
 /// <summary>
-/// Represent an Core Item.
+/// Represent a Core Item.
 /// </summary>
 public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqualityComparer<CoreItem>
 {
@@ -12,29 +12,42 @@ public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqua
     /// A Unique Id / Name for the Item
     /// </summary>
     public string Id { get; set; } = string.Empty;
+
     /// <summary>
     /// Type of the Item.
-    /// <br>Declaring please use nameof(Class)</br>
     /// </summary>
+    /// <remarks>
+    /// Declaring please use nameof(Class)
+    /// </remarks>
     public string ItemType { get; set; } = string.Empty;
+
     /// <summary>
     /// Weight of the Item. How heavy is it.
-    /// <br>Unit is KG [Kilogramm]</br>
     /// </summary>
+    /// <remarks>
+    /// Unit is KG [Kilogramm]
+    /// </remarks>
     public double Weight { get; set; }
+
     /// <summary>
     /// Volume of the Item. How much space does it need.
-    /// <br>Unit is L [Liter]</br>
     /// </summary>
+    /// <remarks>
+    /// Unit is L [Liter]
+    /// </remarks>
     public double Volume { get; set; }
+
     /// <summary>
     /// Path to Instantiate the Item.
     /// </summary>
     public string AssetPath { get; set; } = string.Empty;
+
     /// <summary>
     /// Tags for the Item. 
-    /// <br>Many Items check with Tags. You can use this system.</br>
     /// </summary>
+    /// <remarks>
+    /// Many Items check with Tags. You can use this system.
+    /// </remarks>
     public List<string> Tags { get; set; } = [];
 
     /// <inheritdoc/>

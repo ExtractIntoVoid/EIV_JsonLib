@@ -21,7 +21,7 @@ public partial interface IStorage
     /// </summary>
     public double MaxVolume { get; set; }
     /// <summary>
-    /// Stores a <see cref="List{}"/> of <see cref="CoreItem"/>s.
+    /// Stores a <see cref="List{T}"/> of <see cref="CoreItem"/>s.
     /// </summary>
     public List<CoreItem> Items { get; set; }
 }

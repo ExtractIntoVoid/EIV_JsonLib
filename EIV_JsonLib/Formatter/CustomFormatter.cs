@@ -4,22 +4,37 @@ using EIV_Pack.Formatters;
 
 namespace EIV_JsonLib.Formatter;
 
+/// <summary>
+/// Custom formetters writing desired subtypes of the type.
+/// </summary>
+/// <typeparam name="T">Any type.</typeparam>
 public class CustomFormatter<T> : BaseFormatter<T>
 {
+    /// <summary>
+    /// Type to tag map to easily be identify.
+    /// </summary>
     public Dictionary<Type, int> TypeToTag = [];
-    public int LastTag => TypeToTag.Count == 0 ? 0 : TypeToTag.Last().Value;
-    public int LastAvailable => TypeToTag.Count == 0 ? 0 : TypeToTag.Last().Value + 1;
 
+    /// <summary>
+    /// Last available tag to register a new type.
+    /// </summary>
+    public int LastAvailable => TypeToTag.Count == 0 ? 0 : TypeToTag.Last().Value;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TTypeToAdd"></typeparam>
     public void AddToTag<TTypeToAdd>()
     {
         Type type = typeof(TTypeToAdd);
         if (TypeToTag.ContainsKey(type))
             return;
-
-        TypeToTag.Add(type, LastAvailable);
+        int tag = LastAvailable == 0 ? 0 : LastAvailable + 1;
+        TypeToTag.Add(type, tag);
         FormatterProvider.RegisterCollection<TTypeToAdd>();
     }
 
+    /// <inheritdoc/>
     public override void Deserialize(ref PackReader reader, scoped ref T? value)
     {
         if (!reader.TryReadHeader(out int tag) || tag == EIV_Pack.Constants.NullHeader)
@@ -41,6 +56,7 @@ public class CustomFormatter<T> : BaseFormatter<T>
         }
     }
 
+    /// <inheritdoc/>
     public override void Serialize(ref PackWriter writer, scoped ref readonly T? value)
     {
         if (value == null)

@@ -3,6 +3,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_JsonLib.Extension;
 
+/// <summary>
+/// Extension for <see cref="CoreItem"/>.
+/// </summary>
 public static partial class CoreItemExt
 {
     /// <summary>
@@ -53,15 +56,22 @@ public static partial class CoreItemExt
         return (T?)item.GetType().GetProperty(propertyName)!.GetValue(item);
     }
 
+    /// <summary>
+    /// Change properties of a <paramref name="item"/>.
+    /// </summary>
+    /// <param name="item">The <see cref="CoreItem"/> to get the property from.</param>
+    /// <param name="propertyName">The property name.</param>
+    /// <param name="kv">The change data.</param>
+    /// <returns><see langword="true"/> if the change was success; otherwise <see langword="false"/>.</returns>
     public static bool ChangeProperty(this CoreItem item,
 #if NET8_0_OR_GREATER
         [DisallowNull]
 #endif
-        string valueName, KVChange kv)
+        string propertyName, KVChange kv)
     {
-        if (!item.HasProperty(valueName))
+        if (!item.HasProperty(propertyName))
             return false;
-        System.Reflection.PropertyInfo prop = item.GetType().GetProperty(valueName)!;
+        System.Reflection.PropertyInfo prop = item.GetType().GetProperty(propertyName)!;
         if (!prop.CanWrite)
             return false;
         switch (kv.AvailableTypeName)

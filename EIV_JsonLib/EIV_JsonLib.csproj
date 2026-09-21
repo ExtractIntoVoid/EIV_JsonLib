@@ -7,13 +7,14 @@
     <RootNamespace>EIV_JsonLib</RootNamespace>
     <Title>$(AssemblyName)</Title>
     <Authors>Extract Into Void</Authors>
-    <Description>Json/MemoryPack library for EIV Project</Description>
+    <Description>Json/EIVPack library for EIV Project</Description>
     <Copyright>$(Authors)</Copyright>
     <PackageProjectUrl>https://github.com/ExtractIntoVoid/EIV_JsonLib</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>2.1</Version>
+    <Version>3.0</Version>
     <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,8 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-	<PackageReference Include="EIV_Pack" Version="2.3.0" />
-    <PackageReference Include="EIV_Pack.Generator" Version="2.3.0">
+	<PackageReference Include="EIV_Pack" Version="2.3.1" />
+    <PackageReference Include="EIV_Pack.Generator" Version="2.3.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		<OutputItemType>Analyzer</OutputItemType>
@@ -37,5 +38,20 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" Condition=" $(TargetFramework) == 'netstandard2.0' " />
   </ItemGroup>
+	
+	<Target Name="SetSourceRevisionId" BeforeTargets="InitializeSourceControlInformation">
+		<Exec Command="git describe --long --always --exclude=* --abbrev=8" ConsoleToMSBuild="True" IgnoreExitCode="False">
+			<Output PropertyName="SourceRevisionId" TaskParameter="ConsoleOutput" />
+		</Exec>
+	</Target>
+
+	<ItemGroup>
+		<PackageReference Include="StyleCop.Analyzers.Unstable" Version="1.2.0.556">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<None Remove="stylecop.json" />
+		<AdditionalFiles Include="stylecop.json" />
+	</ItemGroup>
 
 </Project>

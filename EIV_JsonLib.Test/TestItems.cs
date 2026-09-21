@@ -59,7 +59,7 @@ public class TestItems
                 Id = "TestMag",
                 ItemType = nameof(Magazine),
                 Ammunitions = [],
-                Weight = 7456.99M
+                Weight = 7456.99
             }
         };
         Assert.NotNull(gun.Magazine);
