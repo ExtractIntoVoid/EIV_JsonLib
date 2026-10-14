@@ -1,12 +1,28 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using EIV_Pack;
+using EIV_Pack.Formatters;
+using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_Items.Core;
 
 /// <summary>
 /// Represent an Usable Item.
 /// </summary>
-public abstract partial class CoreUsable : CoreItem, IEquatable<CoreUsable>, IEqualityComparer<CoreUsable>
+public abstract partial class CoreUsable : CoreItem, IPackable<CoreUsable>, IEquatable<CoreUsable>, IEqualityComparer<CoreUsable>
 {
+#if NET8_0_OR_GREATER
+    /// <inheritdoc/>
+    public static void SerializePackable(ref PackWriter writer, scoped ref readonly CoreUsable? value)
+    {
+        FormatterInitializer.CoreUsable_Formatter.Serialize(ref writer, in value);
+    }
+
+    /// <inheritdoc/>
+    public static void DeserializePackable(ref PackReader reader, scoped ref CoreUsable? value)
+    {
+        FormatterInitializer.CoreUsable_Formatter.Deserialize(ref reader, ref value);
+    }
+#endif
+
     /// <summary>
     /// Gets a value indicating whether can we use the item.
     /// </summary>

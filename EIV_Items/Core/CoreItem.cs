@@ -1,5 +1,6 @@
 ﻿using EIV_Items.Extensions;
 using EIV_Pack;
+using EIV_Pack.Formatters;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
@@ -10,12 +11,31 @@ namespace EIV_Items.Core;
 /// Represent a Core Item.
 /// </summary>
 [JsonPolymorphic(TypeDiscriminatorPropertyName = DiscriminatorName)]
-public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqualityComparer<CoreItem>
+public abstract partial class CoreItem : IPackable<CoreItem>, ICloneable, IEquatable<CoreItem>, IEqualityComparer<CoreItem>
 {
     /// <summary>
     /// The name for json discriminator.
     /// </summary>
     public const string DiscriminatorName = "ClassType";
+
+#if NET8_0_OR_GREATER
+    /// <inheritdoc/>
+    public static void SerializePackable(ref PackWriter writer, scoped ref readonly CoreItem? value)
+    {
+        FormatterInitializer.CoreItem_Formatter.Serialize(ref writer, in value);
+    }
+
+    /// <inheritdoc/>
+    public static void DeserializePackable(ref PackReader reader, scoped ref CoreItem? value)
+    {
+        FormatterInitializer.CoreItem_Formatter.Deserialize(ref reader, ref value);
+    }
+
+    /// <inheritdoc/>
+    public static void RegisterFormatter()
+    {
+    }
+#endif
 
     /// <summary>
     /// Gets the unique id / name for the item.

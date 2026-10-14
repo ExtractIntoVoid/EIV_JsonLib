@@ -1,5 +1,7 @@
 ﻿using EIV_Items.Extensions;
 using EIV_Items.Interfaces;
+using EIV_Pack;
+using EIV_Pack.Formatters;
 using System.Diagnostics.CodeAnalysis;
 
 namespace EIV_Items.Core;
@@ -7,8 +9,22 @@ namespace EIV_Items.Core;
 /// <summary>
 /// Represent a Core Armor.
 /// </summary>
-public abstract partial class CoreArmor : CoreItem, IWearable, IEquatable<CoreArmor>, IEqualityComparer<CoreArmor>
+public abstract partial class CoreArmor : CoreItem, IWearable, IPackable<CoreArmor>, IEquatable<CoreArmor>, IEqualityComparer<CoreArmor>
 {
+#if NET8_0_OR_GREATER
+    /// <inheritdoc/>
+    public static void SerializePackable(ref PackWriter writer, scoped ref readonly CoreArmor? value)
+    {
+        FormatterInitializer.CoreArmor_Formatter.Serialize(ref writer, in value);
+    }
+
+    /// <inheritdoc/>
+    public static void DeserializePackable(ref PackReader reader, scoped ref CoreArmor? value)
+    {
+        FormatterInitializer.CoreArmor_Formatter.Deserialize(ref reader, ref value);
+    }
+#endif
+
     /// <summary>
     /// Gets how much precent it can block a <see cref="IDamageDealer"/> item.
     /// </summary>
