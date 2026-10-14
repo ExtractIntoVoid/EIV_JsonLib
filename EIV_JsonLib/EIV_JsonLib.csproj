@@ -1,44 +1,50 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net8.0;net10.0;netstandard2.0</TargetFrameworks>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <RootNamespace>EIV_JsonLib</RootNamespace>
-    <Title>$(AssemblyName)</Title>
-    <Authors>Extract Into Void</Authors>
-    <Description>Json/EIVPack library for EIV Project</Description>
-    <Copyright>$(Authors)</Copyright>
-    <PackageProjectUrl>https://github.com/ExtractIntoVoid/EIV_JsonLib</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>3.0</Version>
-    <LangVersion>latest</LangVersion>
-    <GenerateDocumentationFile>False</GenerateDocumentationFile>
-  </PropertyGroup>
+	<!-- Main Properties -->
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net8.0;net10.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
 
-  <ItemGroup>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+		<!-- Package related -->
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-  <ItemGroup>
-	<PackageReference Include="EIV_Pack" Version="2.3.1" />
-    <PackageReference Include="EIV_Pack.Generator" Version="2.3.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		<OutputItemType>Analyzer</OutputItemType>
-		<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" Condition=" $(TargetFramework) == 'netstandard2.0' " />
-  </ItemGroup>
-	
+		<!-- Analyzers -->
+		<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+		<EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
+		<EnableAotAnalyzer>true</EnableAotAnalyzer>
+		<IsAotCompatible>true</IsAotCompatible>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+
+		<!-- Configurations -->
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<AnalysisLevel>latest-all</AnalysisLevel>
+		<AnalysisMode>Recommended</AnalysisMode>
+		<WarningLevel>4</WarningLevel>
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+
+	<!-- Editable properties -->
+	<PropertyGroup>
+		<Title>Json/EIVPack library for EIV Project</Title>
+		<Authors>ExtractIntoVoid</Authors>
+		<Company>ExtractIntoVoid</Company>
+		<Description>Coroutines for EIV</Description>
+		<Copyright>(c) 2024-2026 ExtractIntoVoid</Copyright>
+		<PackageProjectUrl>https://github.com/ExtractIntoVoid/EIV_JsonLib</PackageProjectUrl>
+		<Version>3.0</Version>
+		<FileVersion>3.0</FileVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\LICENSE.txt" Pack="true" PackagePath="\" />
+		<None Include="..\README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
 	<Target Name="SetSourceRevisionId" BeforeTargets="InitializeSourceControlInformation">
 		<Exec Command="git describe --long --always --exclude=* --abbrev=8" ConsoleToMSBuild="True" IgnoreExitCode="False">
 			<Output PropertyName="SourceRevisionId" TaskParameter="ConsoleOutput" />
@@ -54,4 +60,14 @@
 		<AdditionalFiles Include="stylecop.json" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="EIV_Pack" Version="2.3.1" />
+		<PackageReference Include="EIV_Pack.Generator" Version="2.3.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<OutputItemType>Analyzer</OutputItemType>
+			<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" Condition=" $(TargetFramework) == 'netstandard2.0' " />
+	</ItemGroup>
 </Project>

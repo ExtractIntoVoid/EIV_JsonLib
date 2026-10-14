@@ -1,8 +1,8 @@
-﻿using EIV_JsonLib.Base;
+﻿using EIV_Items.Base;
 using EIV_Pack;
 using EIV_Pack.Formatters;
 
-namespace EIV_JsonLib.Formatter;
+namespace EIV_Items.Formatter;
 
 /// <summary>
 /// Custom formetters writing desired subtypes of the type.

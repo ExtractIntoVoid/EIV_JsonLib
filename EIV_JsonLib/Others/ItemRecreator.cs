@@ -1,6 +1,6 @@
 ﻿using EIV_Pack;
 
-namespace EIV_JsonLib;
+namespace EIV_Items;
 
 /// <summary>
 /// Internally cannot be deserialized since this is Just a json

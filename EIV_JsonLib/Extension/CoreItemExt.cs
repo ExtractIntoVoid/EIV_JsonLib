@@ -1,7 +1,7 @@
-﻿using EIV_JsonLib.Base;
+﻿using EIV_Items.Base;
 using System.Diagnostics.CodeAnalysis;
 
-namespace EIV_JsonLib.Extension;
+namespace EIV_Items.Extension;
 
 /// <summary>
 /// Extension for <see cref="CoreItem"/>.

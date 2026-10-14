@@ -1,6 +1,6 @@
-﻿using EIV_JsonLib.Base;
+﻿using EIV_Items.Base;
 
-namespace EIV_JsonLib.Lobby.ItemActions;
+namespace EIV_Items.Lobby.ItemActions;
 
 public class MoveAction
 {

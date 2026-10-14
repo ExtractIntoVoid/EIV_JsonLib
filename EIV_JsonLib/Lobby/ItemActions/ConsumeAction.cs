@@ -1,4 +1,4 @@
-﻿namespace EIV_JsonLib.Lobby.ItemActions;
+﻿namespace EIV_Items.Lobby.ItemActions;
 
 public class ConsumeAction
 {

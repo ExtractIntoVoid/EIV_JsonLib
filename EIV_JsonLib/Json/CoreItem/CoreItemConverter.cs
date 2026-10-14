@@ -1,4 +1,4 @@
-﻿using EIV_JsonLib.Base;
+﻿using EIV_Items.Base;
 #if NET8_0_OR_GREATER
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 #endif
 
-namespace EIV_JsonLib.Json;
+namespace EIV_Items.Json;
 
 public class CoreItemConverter : JsonConverter<CoreItem>
 {

@@ -1,10 +1,10 @@
-﻿using EIV_JsonLib.Base;
-using EIV_JsonLib.Profile.ProfileModules;
-using EIV_JsonLib.Interfaces;
+﻿using EIV_Items.Base;
+using EIV_Items.Profile.ProfileModules;
+using EIV_Items.Interfaces;
 using EIV_Pack;
 using EIV_Pack.Formatters;
 
-namespace EIV_JsonLib.Formatter;
+namespace EIV_Items.Formatter;
 
 public static class FormatterInitializer
 {

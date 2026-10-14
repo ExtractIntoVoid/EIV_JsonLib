@@ -1,11 +1,11 @@
-using EIV_JsonLib.Extension;
-using EIV_JsonLib.Formatter;
-using EIV_JsonLib.Json;
-using EIV_JsonLib.Profile;
-using EIV_JsonLib.Profile.ProfileModules;
+using EIV_Items.Extension;
+using EIV_Items.Formatter;
+using EIV_Items.Json;
+using EIV_Items.Profile;
+using EIV_Items.Profile.ProfileModules;
 using System.Diagnostics;
 
-namespace EIV_JsonLib.Test;
+namespace EIV_Items.Test;
 
 public class TestProfile
 {

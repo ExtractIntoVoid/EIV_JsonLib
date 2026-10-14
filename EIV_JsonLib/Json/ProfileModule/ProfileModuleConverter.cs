@@ -1,4 +1,4 @@
-﻿using EIV_JsonLib.Profile.ProfileModules;
+﻿using EIV_Items.Profile.ProfileModules;
 
 #if NET8_0_OR_GREATER
 using System.Text.Json.Serialization;
@@ -7,7 +7,7 @@ using System.Text.Json;
 using Newtonsoft.Json;
 #endif
 
-namespace EIV_JsonLib.Json;
+namespace EIV_Items.Json;
 
 public class ProfileModuleConverter : JsonConverter<IProfileModule>
 {

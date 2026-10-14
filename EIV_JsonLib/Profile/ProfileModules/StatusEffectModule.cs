@@ -1,7 +1,7 @@
 ﻿using EIV_Pack;
 using System.Reflection;
 
-namespace EIV_JsonLib.Profile.ProfileModules;
+namespace EIV_Items.Profile.ProfileModules;
 
 [EIV_Packable]
 public partial class StatusEffectModule : IProfileModule

@@ -1,5 +1,5 @@
-﻿using EIV_JsonLib.Formatter;
-using EIV_JsonLib.Test;
+﻿using EIV_Items.Formatter;
+using EIV_Items.Test;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 [assembly: AssemblyFixture(typeof(FormatterFixture))]
 
-namespace EIV_JsonLib.Test;
+namespace EIV_Items.Test;
 
 public class FormatterFixture : IDisposable
 {

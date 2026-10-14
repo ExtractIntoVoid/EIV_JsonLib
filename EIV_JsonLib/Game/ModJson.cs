@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace EIV_JsonLib.Game;
+namespace EIV_Items.Game;
 
 /// <summary>
 /// Mod.json file schema

@@ -1,7 +1,7 @@
 ﻿using EIV_Pack;
 using EIV_Pack.Formatters;
 
-namespace EIV_JsonLib.Extension;
+namespace EIV_Items.Extension;
 
 /// <summary>
 /// EIV Pack Extension.

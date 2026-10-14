@@ -1,9 +1,9 @@
-﻿using EIV_JsonLib.Base;
-using EIV_JsonLib.Interfaces;
+﻿using EIV_Items.Base;
+using EIV_Items.Interfaces;
 using EIV_Pack;
 using System.Diagnostics.CodeAnalysis;
 
-namespace EIV_JsonLib.Profile;
+namespace EIV_Items.Profile;
 
 [EIV_Packable]
 public partial class Inventory : IEquatable<Inventory>, IEqualityComparer<Inventory>

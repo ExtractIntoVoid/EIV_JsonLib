@@ -1,4 +1,4 @@
-﻿namespace EIV_JsonLib;
+﻿namespace EIV_Items;
 
 public enum EffectType : byte
 {

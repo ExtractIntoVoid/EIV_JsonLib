@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace EIV_JsonLib.Profile.ProfileModules;
+namespace EIV_Items.Profile.ProfileModules;
 
 public interface IProfileModule
 {

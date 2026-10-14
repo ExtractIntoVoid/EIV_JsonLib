@@ -1,4 +1,4 @@
-﻿namespace EIV_JsonLib.Json;
+﻿namespace EIV_Items.Json;
 
 public static class CoreConverters
 {

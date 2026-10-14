@@ -1,4 +1,4 @@
-﻿namespace EIV_JsonLib.Lobby;
+﻿namespace EIV_Items.Lobby;
 
 public class GameStart
 {

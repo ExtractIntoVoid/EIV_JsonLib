@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 #endif
 
-namespace EIV_JsonLib;
+namespace EIV_Items;
 
 public class ServerInfoJson
 {

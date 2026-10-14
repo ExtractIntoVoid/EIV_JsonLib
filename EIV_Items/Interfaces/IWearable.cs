@@ -1,0 +1,12 @@
+﻿namespace EIV_Items.Interfaces;
+
+/// <summary>
+/// Wearable interface, let the player Wear this item.
+/// </summary>
+public partial interface IWearable
+{
+    /// <summary>
+    /// Gets the slot where is the Item can be put.
+    /// </summary>
+    public string Slot { get; }
+}

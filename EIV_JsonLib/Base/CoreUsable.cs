@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace EIV_JsonLib.Base;
+namespace EIV_Items.Base;
 
 /// <summary>
 /// Represent an Usable Item.

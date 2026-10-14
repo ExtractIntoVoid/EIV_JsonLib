@@ -1,4 +1,4 @@
-﻿namespace EIV_JsonLib.Interfaces;
+﻿namespace EIV_Items.Interfaces;
 
 /// <summary>
 /// Wearable interface, let the player Wear this item.

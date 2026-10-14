@@ -1,4 +1,4 @@
-﻿namespace EIV_JsonLib.Interfaces;
+﻿namespace EIV_Items.Interfaces;
 
 public partial interface IDurable
 {

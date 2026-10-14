@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 #endif
 
-namespace EIV_JsonLib.Json;
+namespace EIV_Items.Json;
 
 internal class Internal_CoreItemConverter : IJsonLibConverter
 {

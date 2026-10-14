@@ -1,8 +1,8 @@
-﻿using EIV_JsonLib.Profile.ProfileModules;
+﻿using EIV_Items.Profile.ProfileModules;
 using EIV_Pack;
 using System.Diagnostics.CodeAnalysis;
 
-namespace EIV_JsonLib.Profile;
+namespace EIV_Items.Profile;
 
 [EIV_Packable]
 public partial class UserCharacter : IEquatable<UserCharacter>, IEqualityComparer<UserCharacter>

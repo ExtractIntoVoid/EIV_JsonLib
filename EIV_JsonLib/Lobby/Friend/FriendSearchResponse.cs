@@ -1,4 +1,4 @@
-﻿namespace EIV_JsonLib.Lobby.Friend;
+﻿namespace EIV_Items.Lobby.Friend;
 
 public class FriendSearchResponse
 {

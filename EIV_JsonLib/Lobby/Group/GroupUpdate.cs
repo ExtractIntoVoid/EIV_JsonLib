@@ -1,4 +1,4 @@
-﻿namespace EIV_JsonLib.Lobby.Group;
+﻿namespace EIV_Items.Lobby.Group;
 
 public class GroupUpdate
 {

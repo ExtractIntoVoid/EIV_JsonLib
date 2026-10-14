@@ -1,8 +1,8 @@
-﻿using EIV_JsonLib.Base;
-using EIV_JsonLib.Interfaces;
+﻿using EIV_Items.Base;
+using EIV_Items.Interfaces;
 using EIV_Pack;
 
-namespace EIV_JsonLib;
+namespace EIV_Items;
 
 [EIV_Packable]
 public partial class Ammo : CoreItem, IDamageDealer

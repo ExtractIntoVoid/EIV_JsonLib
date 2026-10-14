@@ -1,8 +1,8 @@
-﻿using EIV_JsonLib.Base;
-using EIV_JsonLib.Extension;
-using EIV_JsonLib.Formatter;
+﻿using EIV_Items.Base;
+using EIV_Items.Extension;
+using EIV_Items.Formatter;
 
-namespace EIV_JsonLib.Test;
+namespace EIV_Items.Test;
 
 public class TestItems
 {

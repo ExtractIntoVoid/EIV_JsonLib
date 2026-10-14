@@ -1,7 +1,7 @@
-﻿using EIV_JsonLib.Interfaces;
+﻿using EIV_Items.Interfaces;
 using System.Diagnostics.CodeAnalysis;
 
-namespace EIV_JsonLib.Base;
+namespace EIV_Items.Base;
 
 /// <summary>
 /// Represent a Core Armor.

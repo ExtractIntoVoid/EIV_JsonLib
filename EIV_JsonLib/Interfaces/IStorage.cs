@@ -1,7 +1,7 @@
-﻿using EIV_JsonLib.Base;
+﻿using EIV_Items.Base;
 using EIV_Pack.Formatters;
 
-namespace EIV_JsonLib.Interfaces;
+namespace EIV_Items.Interfaces;
 
 /// <summary>
 /// Storage Interface, makes inventory slots available for this item.

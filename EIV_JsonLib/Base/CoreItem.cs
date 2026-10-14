@@ -1,7 +1,7 @@
 ﻿using EIV_Pack;
 using System.Diagnostics.CodeAnalysis;
 
-namespace EIV_JsonLib.Base;
+namespace EIV_Items.Base;
 
 /// <summary>
 /// Represent a Core Item.
