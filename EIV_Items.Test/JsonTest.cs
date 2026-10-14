@@ -89,7 +89,6 @@ namespace EIV_Items.Test
             var options = JsonSerializerConvert.GetSerializerSettings();
 
             string json = JsonSerializer.Serialize(wearables, options);
-            Console.WriteLine(json);
             var items = JsonSerializer.Deserialize<Collection<IWearable>>(json, options);
 
             Assert.That(items, Is.Not.Null);

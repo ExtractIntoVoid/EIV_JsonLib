@@ -76,7 +76,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\EIV_CoreDefs\EIV_DefinitionCore.csproj" />
+		<ProjectReference Include="..\EIV_DefinitionCore\EIV_DefinitionCore.csproj" />
 		<ProjectReference Include="..\EIV_Items\EIV_Items.csproj" />
 	</ItemGroup>
 </Project>
