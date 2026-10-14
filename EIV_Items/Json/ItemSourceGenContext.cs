@@ -1,4 +1,5 @@
 ﻿using EIV_Items.Core;
+using EIV_Items.Interfaces;
 using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
@@ -27,6 +28,16 @@ namespace EIV_Items.Json
 
     [JsonSerializable(typeof(List<CoreItem>))]
     [JsonSerializable(typeof(Collection<CoreItem>))]
+
+    [JsonSerializable(typeof(List<CoreUsable>))]
+    [JsonSerializable(typeof(Collection<CoreUsable>))]
+
+    [JsonSerializable(typeof(List<CoreArmor>))]
+    [JsonSerializable(typeof(Collection<CoreArmor>))]
+
+    [JsonSerializable(typeof(Stash))]
+
+    [JsonSerializable(typeof(Collection<IWearable>))]
     public partial class ItemSourceGenContext : JsonSerializerContext
     {
     }

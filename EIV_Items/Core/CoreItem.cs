@@ -56,6 +56,22 @@ public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqua
     /// </remarks>
     public Collection<string> Tags { get; init; } = [];
 
+    /// <summary>
+    /// Checks this item if it's <typeparamref name="T"/> type.
+    /// </summary>
+    /// <typeparam name="T">Any <see cref="CoreItem"/>.</typeparam>
+    /// <returns><see langword="true"/> if this item is <typeparamref name="T"/> otherwise <see langword="false"/>.</returns>
+    public bool Is<T>()
+        where T : CoreItem => this is T;
+
+    /// <summary>
+    /// Parsing the this item as <typeparamref name="T"/> type.
+    /// </summary>
+    /// <typeparam name="T">Any <see cref="CoreItem"/>.</typeparam>
+    /// <returns>this item as <typeparamref name="T"/> type, or <see langword="default"/>.</returns>
+    public T? As<T>()
+        where T : CoreItem => this is T t ? t : default;
+
     /// <inheritdoc/>
     public object Clone()
     {

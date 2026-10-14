@@ -3,6 +3,6 @@
   <Project Path="EIV_Effects/EIV_Effects.csproj" Id="28eda038-8d30-4ca0-92ce-625f1e0bdffa" />
   <Project Path="EIV_Items.Test/EIV_Items.Test.csproj" Id="456bb8d8-dd7d-4fc8-a2a0-8bbfb3558165" />
   <Project Path="EIV_Items/EIV_Items.csproj" Id="c6641f86-a8a9-4a97-ae20-ad1112e05b9f" />
-  <Project Path="EIV_JsonLib.Test/EIV_JsonLib.Test.csproj" />
-  <Project Path="EIV_JsonLib/EIV_JsonLib.csproj" />
+  <Project Path="EIV_Profile.Test/EIV_Profile.Test.csproj" Id="f533e265-4b0f-4cef-8d96-32ab1459a7cb" />
+  <Project Path="EIV_Profile/EIV_Profile.csproj" Id="261eb250-1a1f-408e-8811-810113f9e064" />
 </Solution>

@@ -1,5 +1,7 @@
 ﻿using EIV_Items.Core;
+using EIV_Items.Interfaces;
 using EIV_Items.Json;
+using System.Collections.ObjectModel;
 using System.Text.Json;
 
 namespace EIV_Items.Test
@@ -66,6 +68,29 @@ namespace EIV_Items.Test
             string json = JsonSerializer.Serialize<List<CoreItem>>([melee, melee2], options);
 
             List<CoreItem>? items = JsonSerializer.Deserialize<List<CoreItem>>(json, options);
+
+            Assert.That(items, Is.Not.Null);
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(items, Is.Not.Empty);
+            }
+        }
+
+        [Test]
+        public void InterfaceTest()
+        {
+            Collection<IWearable> wearables =
+            [
+                new Helmet(),
+                new Rig(),
+                new Vest(),
+            ];
+
+            var options = JsonSerializerConvert.GetSerializerSettings();
+
+            string json = JsonSerializer.Serialize(wearables, options);
+            Console.WriteLine(json);
+            var items = JsonSerializer.Deserialize<Collection<IWearable>>(json, options);
 
             Assert.That(items, Is.Not.Null);
             using (Assert.EnterMultipleScope())
