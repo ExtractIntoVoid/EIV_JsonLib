@@ -13,6 +13,7 @@ namespace EIV_Items;
 public partial class ArmorPlate : CoreItem, IDurable
 {
     /// <inheritdoc />
+    [JsonIgnore]
     public override string ItemType { get; init; } = nameof(ArmorPlate);
 
     /// <summary>

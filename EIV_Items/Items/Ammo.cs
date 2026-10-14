@@ -13,6 +13,7 @@ namespace EIV_Items;
 public partial class Ammo : CoreItem, IDamageDealer
 {
     /// <inheritdoc />
+    [JsonIgnore]
     public override string ItemType { get; init; } = nameof(Ammo);
 
     /// <summary>

@@ -11,5 +11,6 @@ namespace EIV_Items;
 public partial class Vest : CoreArmor
 {
     /// <inheritdoc />
+    [JsonIgnore]
     public override string ItemType { get; init; } = nameof(Vest);
 }

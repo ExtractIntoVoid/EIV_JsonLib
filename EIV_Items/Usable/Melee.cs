@@ -13,6 +13,7 @@ namespace EIV_Items;
 public partial class Melee : CoreUsable, IDamageDealer
 {
     /// <inheritdoc />
+    [JsonIgnore]
     public override string ItemType { get; init; } = nameof(Melee);
 
     /// <inheritdoc/>

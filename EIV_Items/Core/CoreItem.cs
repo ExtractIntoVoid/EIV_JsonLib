@@ -9,9 +9,14 @@ namespace EIV_Items.Core;
 /// <summary>
 /// Represent a Core Item.
 /// </summary>
-[JsonPolymorphic(TypeDiscriminatorPropertyName = nameof(ItemType))]
+[JsonPolymorphic(TypeDiscriminatorPropertyName = DiscriminatorName)]
 public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqualityComparer<CoreItem>
 {
+    /// <summary>
+    /// The name for json discriminator.
+    /// </summary>
+    public const string DiscriminatorName = "ClassType";
+
     /// <summary>
     /// Gets the unique id / name for the item.
     /// </summary>
@@ -24,6 +29,7 @@ public abstract partial class CoreItem : ICloneable, IEquatable<CoreItem>, IEqua
     /// Declaring please use <see langword="nameof"/>.
     /// </remarks>
     [JsonIgnore]
+    [EIV_PackIgnore]
     public abstract string ItemType { get; init; }
 
     /// <summary>

@@ -14,6 +14,7 @@ namespace EIV_Items;
 public partial class Rig : CoreArmor, IStorage, ICompatible
 {
     /// <inheritdoc />
+    [JsonIgnore]
     public override string ItemType { get; init; } = nameof(Rig);
 
     /// <inheritdoc/>

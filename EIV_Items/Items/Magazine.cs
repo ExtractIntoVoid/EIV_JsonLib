@@ -14,6 +14,7 @@ namespace EIV_Items;
 public partial class Magazine : CoreItem, ICompatible
 {
     /// <inheritdoc />
+    [JsonIgnore]
     public override string ItemType { get; init; } = nameof(Magazine);
 
     /// <summary>

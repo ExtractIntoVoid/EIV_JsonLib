@@ -12,6 +12,7 @@ namespace EIV_Items;
 public partial class Consumable : CoreUsable
 {
     /// <inheritdoc />
+    [JsonIgnore]
     public override string ItemType { get; init; } = nameof(Consumable);
 
     /// <summary>

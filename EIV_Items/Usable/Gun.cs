@@ -14,6 +14,7 @@ namespace EIV_Items;
 public partial class Gun : CoreUsable, ICompatible
 {
     /// <inheritdoc />
+    [JsonIgnore]
     public override string ItemType { get; init; } = nameof(Gun);
 
     /// <summary>

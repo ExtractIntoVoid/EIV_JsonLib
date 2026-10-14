@@ -14,6 +14,7 @@ namespace EIV_Items;
 public partial class Backpack : CoreItem, IWearable, IStorage
 {
     /// <inheritdoc />
+    [JsonIgnore]
     public override string ItemType { get; init; } = nameof(Backpack);
 
     /// <inheritdoc />

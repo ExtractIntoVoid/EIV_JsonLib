@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 
 /// <summary>
@@ -7,12 +6,15 @@ using System.Text.Json.Serialization.Metadata;
 /// </summary>
 public static class JsonSerializerConvert
 {
-    public static Collection<PolymorphismRegistry> Polymorphisms { get; } = [];
+    /// <summary>
+    /// Gets the <see cref="PolymorphismRegistry"/>'s.
+    /// </summary>
+    public static HashSet<PolymorphismRegistry> Polymorphisms { get; } = [];
 
     /// <summary>
     /// Gets the type info resolvers.
     /// </summary>
-    public static Collection<IJsonTypeInfoResolver> Resolvers { get; } = [];
+    public static HashSet<IJsonTypeInfoResolver> Resolvers { get; } = [];
 
     /// <summary>
     /// Get the default serialzier options with all <see cref="Resolvers"/>.

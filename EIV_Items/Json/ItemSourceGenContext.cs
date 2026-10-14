@@ -1,4 +1,5 @@
 ﻿using EIV_Items.Core;
+using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
 namespace EIV_Items.Json
@@ -7,6 +8,7 @@ namespace EIV_Items.Json
     /// Repressent an item source generated context.
     /// </summary>
     [JsonSourceGenerationOptions]
+
     [JsonSerializable(typeof(Helmet))]
     [JsonSerializable(typeof(Rig))]
     [JsonSerializable(typeof(Vest))]
@@ -22,6 +24,9 @@ namespace EIV_Items.Json
     [JsonSerializable(typeof(Gun))]
     [JsonSerializable(typeof(Melee))]
     [JsonSerializable(typeof(Throwable))]
+
+    [JsonSerializable(typeof(List<CoreItem>))]
+    [JsonSerializable(typeof(Collection<CoreItem>))]
     public partial class ItemSourceGenContext : JsonSerializerContext
     {
     }
