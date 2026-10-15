@@ -11,8 +11,8 @@ namespace EIV_Profile.Test
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            ItemJsonInitilaizer.Initialize();
-            ProfileJsonInitilaizer.Initialize();
+            ItemJsonInitializer.Initialize();
+            ProfileJsonInitializer.Initialize();
         }
 
         [Test]

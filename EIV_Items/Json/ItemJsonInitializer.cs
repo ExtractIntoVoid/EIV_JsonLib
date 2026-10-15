@@ -6,7 +6,7 @@ namespace EIV_Items.Json;
 /// <summary>
 /// Provides json polymorphism register.
 /// </summary>
-public static class ItemJsonInitilaizer
+public static class ItemJsonInitializer
 {
     /// <summary>
     /// Gets the <see cref="CoreItem"/> polymorphism registry.

@@ -11,7 +11,7 @@ namespace EIV_Items.Test
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            ItemJsonInitilaizer.Initialize();
+            ItemJsonInitializer.Initialize();
         }
 
         [Test]

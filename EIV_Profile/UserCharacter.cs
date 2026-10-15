@@ -19,9 +19,9 @@ public partial class UserCharacter : IEquatable<UserCharacter>, IEqualityCompare
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets the origin of the character.
+    /// Gets or sets the origin of the character.
     /// </summary>
-    public string Origin { get; init; } = string.Empty;
+    public string Origin { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets the creation date of the character.
@@ -29,9 +29,9 @@ public partial class UserCharacter : IEquatable<UserCharacter>, IEqualityCompare
     public DateTimeOffset CreationDate { get; init; } = DateTimeOffset.MinValue;
 
     /// <summary>
-    /// Gets the inventory.
+    /// Gets or sets the inventory.
     /// </summary>
-    public Inventory Inventory { get; init; } = new();
+    public Inventory Inventory { get; set; } = new();
 
     /// <summary>
     /// Gets the profile modules.

@@ -5,7 +5,7 @@ namespace EIV_Profile.Json;
 /// <summary>
 /// Provides json polymorphism register.
 /// </summary>
-public static class ProfileJsonInitilaizer
+public static class ProfileJsonInitializer
 {
     /// <summary>
     /// Gets the <see cref="IProfileModule"/> polymorphism registry.
