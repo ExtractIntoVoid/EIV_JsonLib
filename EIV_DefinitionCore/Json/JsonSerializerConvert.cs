@@ -96,13 +96,12 @@ public static class JsonSerializerConvert
     /// Tries to get the type info.
     /// </summary>
     /// <typeparam name="T">Any type.</typeparam>
-    /// <param name="type">The type.</param>
     /// <param name="typeInfo">The type info.</param>
     /// <returns><see langword="true"/> if success; otherwise <see langword="false"/>.</returns>
-    public static bool TryGetTypeInfo<T>([NotNull] Type type, [NotNullWhen(true)] out JsonTypeInfo<T>? typeInfo)
+    public static bool TryGetTypeInfo<T>([NotNullWhen(true)] out JsonTypeInfo<T>? typeInfo)
     {
         JsonSerializerOptions options = GetSerializerSettings();
-        typeInfo = options.GetTypeInfo(type) as JsonTypeInfo<T>;
+        typeInfo = options.GetTypeInfo(typeof(T)) as JsonTypeInfo<T>;
         return typeInfo != null;
     }
 
