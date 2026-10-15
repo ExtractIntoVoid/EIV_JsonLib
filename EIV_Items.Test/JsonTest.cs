@@ -97,5 +97,30 @@ namespace EIV_Items.Test
                 Assert.That(items, Is.Not.Empty);
             }
         }
+
+        [Test]
+        public void TypeInfoTest()
+        {
+
+            string id = "test";
+
+            Melee melee = new()
+            {
+                Id = id,
+            };
+
+            var options = JsonSerializerConvert.GetSerializerSettings();
+
+            string json = JsonSerializer.Serialize<CoreItem>(melee, JsonSerializerConvert.GetTypeInfo<CoreItem>()!);
+
+            CoreItem? item = JsonSerializer.Deserialize<CoreItem>(json, JsonSerializerConvert.GetTypeInfo<CoreItem>()!);
+
+            Assert.That(item, Is.Not.Null);
+            using (Assert.EnterMultipleScope())
+            {
+                Assert.That(item.Id, Is.EqualTo(id));
+                Assert.That(item.ItemType, Is.EqualTo(nameof(Melee)));
+            }
+        }
     }
 }

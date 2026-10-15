@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 
 /// <summary>
@@ -54,6 +55,55 @@ public static class JsonSerializerConvert
         });
 
         return jsonSerializerSettings;
+    }
+
+    /// <summary>
+    /// Gets the type info.
+    /// </summary>
+    /// <param name="type">The type.</param>
+    /// <returns>The type info.</returns>
+    public static JsonTypeInfo? GetTypeInfo([NotNull] Type type)
+    {
+        JsonSerializerOptions options = GetSerializerSettings();
+        return options.GetTypeInfo(type);
+    }
+
+    /// <summary>
+    /// Tries to get the type info.
+    /// </summary>
+    /// <param name="type">The type.</param>
+    /// <param name="typeInfo">The type info.</param>
+    /// <returns><see langword="true"/> if success; otherwise <see langword="false"/>.</returns>
+    public static bool TryGetTypeInfo([NotNull] Type type, [NotNullWhen(true)] out JsonTypeInfo? typeInfo)
+    {
+        JsonSerializerOptions options = GetSerializerSettings();
+        typeInfo = options.GetTypeInfo(type);
+        return typeInfo != null;
+    }
+
+    /// <summary>
+    /// Gets the type info.
+    /// </summary>
+    /// <typeparam name="T">Any type.</typeparam>
+    /// <returns>The type info.</returns>
+    public static JsonTypeInfo<T>? GetTypeInfo<T>()
+    {
+        JsonSerializerOptions options = GetSerializerSettings();
+        return options.GetTypeInfo(typeof(T)) as JsonTypeInfo<T>;
+    }
+
+    /// <summary>
+    /// Tries to get the type info.
+    /// </summary>
+    /// <typeparam name="T">Any type.</typeparam>
+    /// <param name="type">The type.</param>
+    /// <param name="typeInfo">The type info.</param>
+    /// <returns><see langword="true"/> if success; otherwise <see langword="false"/>.</returns>
+    public static bool TryGetTypeInfo<T>([NotNull] Type type, [NotNullWhen(true)] out JsonTypeInfo<T>? typeInfo)
+    {
+        JsonSerializerOptions options = GetSerializerSettings();
+        typeInfo = options.GetTypeInfo(type) as JsonTypeInfo<T>;
+        return typeInfo != null;
     }
 
     /// <summary>
